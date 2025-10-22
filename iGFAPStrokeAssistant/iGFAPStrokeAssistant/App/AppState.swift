@@ -86,7 +86,7 @@ class AppState: ObservableObject {
         // In production, this would call the authenticate API endpoint
         let validCodes = ["Neuro25", "research2024"]
 
-        await Task.sleep(500_000_000) // 0.5 second delay
+        try? await Task.sleep(nanoseconds: 500_000_000) // 0.5 second delay
 
         if validCodes.contains(accessCode) {
             isAuthenticated = true
