@@ -95,7 +95,17 @@ struct ResultsView: View {
                 // ICH Volume (if available and significant)
                 if let volume = results?.ich.volume,
                    results?.ich.percentageRisk ?? 0 >= 50 {
-                    VolumeCardView(volume: volume)
+                    VStack(alignment: .leading, spacing: 16) {
+                        Text("ICH Volume Estimation")
+                            .font(.title2)
+                            .fontWeight(.bold)
+
+                        // Brain Visualization
+                        BrainVisualizationView(volume: volume)
+                            .frame(height: 220)
+
+                        VolumeCardView(volume: volume)
+                    }
                 }
 
                 // Risk Drivers
@@ -123,8 +133,51 @@ struct ResultsView: View {
                     }
                 }
 
+                // Stroke Center Map
+                if let _ = assessment {
+                    VStack(alignment: .leading, spacing: 16) {
+                        Text("Nearby Stroke Centers")
+                            .font(.title2)
+                            .fontWeight(.bold)
+
+                        NavigationLink(destination: StrokeCenterMapView()) {
+                            HStack {
+                                Image(systemName: "map.fill")
+                                Text("Find Stroke Centers")
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                            }
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(Color.green)
+                            )
+                        }
+                    }
+                }
+
                 // Actions
                 VStack(spacing: 12) {
+                    // PDF Export
+                    if let _ = assessment {
+                        Button(action: { exportPDF() }) {
+                            HStack {
+                                Image(systemName: "doc.text.fill")
+                                Text("Export PDF Report")
+                            }
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(Color.orange)
+                            )
+                        }
+                    }
+
                     Button(action: startNewAssessment) {
                         HStack {
                             Image(systemName: "arrow.counterclockwise")
@@ -181,6 +234,23 @@ struct ResultsView: View {
 
     private func startNewAssessment() {
         appState.reset()
+    }
+
+    private func exportPDF() {
+        guard let assessment = assessment else { return }
+
+        if let pdfURL = PDFExportService.generatePDF(for: assessment) {
+            // Share PDF
+            let activityVC = UIActivityViewController(
+                activityItems: [pdfURL],
+                applicationActivities: nil
+            )
+
+            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+               let rootVC = windowScene.windows.first?.rootViewController {
+                rootVC.present(activityVC, animated: true)
+            }
+        }
     }
 }
 
