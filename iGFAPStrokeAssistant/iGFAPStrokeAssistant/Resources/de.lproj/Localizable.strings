@@ -1,0 +1,152 @@
+/*
+  Localizable.strings (German)
+  iGFAP Stroke Triage Assistant
+
+  Deutsche Lokalisierung
+*/
+
+/* Authentifizierung */
+"app.title" = "iGFAP Schlaganfall Triage";
+"auth.research.access" = "Forschungszugang";
+"auth.disclaimer.title" = "Nur für Forschungszwecke";
+"auth.disclaimer.message" = "Diese Anwendung dient ausschließlich Forschungszwecken und ist nicht für den klinischen Einsatz zugelassen. Konsultieren Sie immer qualifizierte medizinische Fachkräfte für Entscheidungen zur Patientenversorgung.";
+"auth.access.code" = "Forschungszugangscode";
+"auth.access.code.placeholder" = "Zugangscode eingeben";
+"auth.access.code.help" = "Kontaktieren Sie Ihren Forschungskoordinator für den Zugang";
+"auth.login.button" = "Sichere Anmeldung";
+"auth.invalid.code" = "Ungültiger Zugangscode. Bitte versuchen Sie es erneut.";
+"auth.footer.ce" = "CE-Zertifizierung ausstehend";
+"auth.footer.copyright" = "© 2025 iGFAP Forschungsteam";
+
+/* Triage */
+"triage.coma.title" = "Patientenbeurteilung";
+"triage.coma.question" = "Ist der Patient komatös?";
+"triage.coma.help" = "Glasgow Coma Scale (GCS) < 8";
+"triage.coma.yes" = "Ja (GCS < 8)";
+"triage.coma.no" = "Nein (GCS ≥ 8)";
+"triage.exam.question" = "Kann der Patient zuverlässig untersucht werden?";
+"triage.exam.yes" = "Ja - Vollständige Untersuchung möglich";
+"triage.exam.no" = "Nein - Nur begrenzte Daten";
+
+/* Beurteilungsmodule */
+"module.coma" = "Koma-Modul";
+"module.coma.description" = "Für Patienten mit GCS < 8 (komatös)";
+"module.limited" = "Begrenzte Daten";
+"module.limited.description" = "Für Patienten, die nicht zuverlässig untersucht werden können";
+"module.full" = "Vollständige Beurteilung";
+"module.full.description" = "Umfassende Schlaganfallbeurteilung";
+
+/* Patientendatenfelder */
+"field.age" = "Alter";
+"field.age.unit" = "Jahre";
+"field.age.help" = "Patientenalter in Jahren";
+"field.bp.systolic" = "Systolischer Blutdruck";
+"field.bp.diastolic" = "Diastolischer Blutdruck";
+"field.bp.unit" = "mmHg";
+"field.bp.help" = "Blutdruckmessung";
+"field.bp.error" = "Systolischer Blutdruck muss größer als diastolischer Blutdruck sein";
+"field.gfap" = "GFAP-Wert";
+"field.gfap.unit" = "pg/ml";
+"field.gfap.help" = "Gültiger Bereich: 29-10.001 pg/ml";
+"field.gfap.error" = "GFAP-Wert muss zwischen 29 und 10.001 pg/ml liegen";
+"field.fast.ed" = "FAST-ED-Score";
+"field.fast.ed.help" = "Score-Bereich: 0-9";
+"field.fast.ed.calculate" = "FAST-ED-Score berechnen";
+
+/* Symptome */
+"symptom.headache" = "Kopfschmerzen";
+"symptom.vigilance" = "Vigilanzminderung";
+"symptom.arm.paresis" = "Armparese";
+"symptom.leg.paresis" = "Beinparese";
+"symptom.eye.deviation" = "Blickdeviation";
+
+/* Krankengeschichte */
+"history.afib" = "Vorhofflimmern";
+"history.anticoagulation" = "Antikoagulation (NOAK)";
+"history.antiplatelets" = "Thrombozytenaggregationshemmer";
+
+/* Ergebnisse */
+"results.title" = "Beurteilungsergebnisse";
+"results.ich.risk" = "ICB-Risiko";
+"results.ich.volume" = "Geschätztes ICB-Volumen";
+"results.lvo.risk" = "LVO-Risiko";
+"results.drivers.title" = "Risikofaktoren";
+"results.confidence" = "Konfidenz";
+"results.new.assessment" = "Neue Beurteilung";
+"results.export.pdf" = "PDF-Bericht exportieren";
+"results.stroke.centers" = "Schlaganfallzentren in der Nähe";
+
+/* Risikolevel */
+"risk.low" = "Niedriges Risiko";
+"risk.medium" = "Mittleres Risiko";
+"risk.high" = "Hohes Risiko";
+"risk.critical" = "Sehr hohes Risiko";
+
+/* Volumenschweregrad */
+"volume.small" = "Klein";
+"volume.moderate" = "Mittel";
+"volume.large" = "Groß";
+"volume.critical" = "Kritisch";
+
+/* FAST-ED-Rechner */
+"fast.ed.title" = "FAST-ED-Rechner";
+"fast.ed.facial" = "Faziale Parese";
+"fast.ed.facial.normal" = "Normal / Leicht";
+"fast.ed.facial.partial" = "Partiell";
+"fast.ed.facial.complete" = "Komplett";
+"fast.ed.arm" = "Armschwäche";
+"fast.ed.arm.normal" = "Normal / Leicht";
+"fast.ed.arm.moderate" = "Mittel / Schwer";
+"fast.ed.speech" = "Sprachstörung";
+"fast.ed.speech.normal" = "Normal";
+"fast.ed.speech.mild" = "Leichte Dysarthrie";
+"fast.ed.speech.severe" = "Schwer / Stumm";
+"fast.ed.eye" = "Blickdeviation";
+"fast.ed.eye.absent" = "Nicht vorhanden";
+"fast.ed.eye.present" = "Vorhanden";
+"fast.ed.denial" = "Neglect / Anosognosie";
+"fast.ed.denial.absent" = "Nicht vorhanden";
+"fast.ed.denial.present" = "Vorhanden";
+"fast.ed.total" = "Gesamtscore";
+"fast.ed.lvo.risk" = "LVO-Risiko";
+"fast.ed.lvo.low" = "Niedriges LVO-Risiko";
+"fast.ed.lvo.high" = "Hohes LVO-Risiko";
+
+/* Schlaganfallzentren */
+"centers.title" = "Schlaganfallzentren";
+"centers.distance" = "Entfernung";
+"centers.type.primary" = "Primär";
+"centers.type.comprehensive" = "Umfassend";
+"centers.directions" = "Route anzeigen";
+"centers.call" = "Anrufen";
+"centers.location.error" = "Ortungsdienste nicht verfügbar";
+
+/* Schaltflächen */
+"button.submit" = "Beurteilung absenden";
+"button.cancel" = "Abbrechen";
+"button.back" = "Zurück";
+"button.continue" = "Weiter";
+"button.done" = "Fertig";
+"button.close" = "Schließen";
+"button.logout" = "Abmelden";
+
+/* Fehler */
+"error.title" = "Fehler";
+"error.network" = "Netzwerkfehler. Bitte überprüfen Sie Ihre Verbindung.";
+"error.server" = "Serverfehler. Bitte versuchen Sie es später erneut.";
+"error.validation" = "Bitte überprüfen Sie Ihre Eingabe und versuchen Sie es erneut.";
+"error.unknown" = "Ein unbekannter Fehler ist aufgetreten.";
+
+/* Laden */
+"loading.processing" = "Verarbeite...";
+"loading.authenticating" = "Authentifiziere...";
+"loading.calculating" = "Berechne Risiko...";
+
+/* Allgemein */
+"ok" = "OK";
+"yes" = "Ja";
+"no" = "Nein";
+"save" = "Speichern";
+"delete" = "Löschen";
+"required" = "Erforderlich";
+"optional" = "Optional";
