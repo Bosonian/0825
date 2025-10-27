@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: '/0825/kiosk/',
+  base: '/0925/kiosk/',
   server: {
     port: 3001,
     host: true,

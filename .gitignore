@@ -40,3 +40,6 @@ coverage/
 *.pkl
 *.h5
 *.model
+
+# Kiosk build output (gets copied to dist/kiosk/ for deployment)
+kiosk/dist/
