@@ -41,5 +41,5 @@ coverage/
 *.h5
 *.model
 
-# Kiosk build output (gets copied to dist/kiosk/ for deployment)
-kiosk/dist/
+# Kiosk build output
+kiosk-src/dist/

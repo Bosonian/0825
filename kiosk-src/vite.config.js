@@ -7,7 +7,8 @@ export default defineConfig({
     host: true,
   },
   build: {
-    outDir: 'dist',
+    outDir: '../kiosk',
+    emptyOutDir: true,
     target: 'es2020',
     minify: 'esbuild',
     sourcemap: true,
