@@ -13,6 +13,7 @@ import { store } from './state/store.js';
 import { render } from './ui/render.js';
 import { safeAsync, ERROR_CATEGORIES, ERROR_SEVERITY } from './utils/error-handler.js';
 import { initializeAPIWarmup } from './core/api-warmup.js';
+import { initializeKioskHandlers } from './handlers/kiosk-handlers.js';
 
 /**
  * Application instance
@@ -212,6 +213,9 @@ async function main() {
 
     // Initialize the application
     await initializeApplication();
+
+    // Initialize kiosk integration handlers
+    initializeKioskHandlers();
 
     // Application started successfully
     const event = new CustomEvent('appReady', {

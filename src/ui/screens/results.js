@@ -133,7 +133,7 @@ function renderRiskCard(type, data, results) {
                     stroke-linecap="round"
                     transform="rotate(-90 60 60)"/>
                   <text x="60" y="60" text-anchor="middle" dominant-baseline="middle"
-                    class="probability-text" fill="white" font-size="20" font-weight="bold">
+                    class="probability-text" fill="currentColor" font-size="20" font-weight="bold">
                     ${percent}%
                   </text>
                 </svg>
@@ -361,6 +361,7 @@ function renderICHFocusedResults(ich, results, startTime, legacyResults, current
       
       <div class="results-actions">
         <div class="primary-actions">
+          <button type="button" class="primary" id="shareToKiosk"> 🚀 Send to Hospital </button>
           <button type="button" class="primary" id="printResults"> 📄 ${t('printResults')} </button>
           <button type="button" class="secondary" data-action="reset"> ${t('newAssessment')} </button>
         </div>
@@ -490,6 +491,7 @@ function renderFullModuleResults(ich, lvo, results, startTime, legacyResults, cu
       
       <div class="results-actions">
         <div class="primary-actions">
+          <button type="button" class="primary" id="shareToKiosk"> 🚀 Send to Hospital </button>
           <button type="button" class="primary" id="printResults"> 📄 ${t('printResults')} </button>
           <button type="button" class="secondary" data-action="reset"> ${t('newAssessment')} </button>
         </div>
