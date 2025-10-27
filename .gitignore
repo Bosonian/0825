@@ -40,6 +40,3 @@ coverage/
 *.pkl
 *.h5
 *.model
-
-# Kiosk build output
-kiosk-src/dist/
