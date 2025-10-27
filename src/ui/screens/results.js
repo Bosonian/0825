@@ -269,7 +269,7 @@ export function renderResults(results, startTime) {
         const { mountIslands } = await import('../../react/mountIslands.jsx');
         mountIslands();
       } catch (err) {
-      // ('React islands not available:', err);
+        console.log('React islands not available, using vanilla SVG:', err);
       }
     }, 100);
 
