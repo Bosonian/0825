@@ -1,0 +1,161 @@
+/*
+  Localizable.strings (English)
+  iGFAP Stroke Triage Assistant
+
+  English localization
+*/
+
+/* Authentication */
+"app.title" = "iGFAP Stroke Triage";
+"auth.research.access" = "Research Access";
+"auth.disclaimer.title" = "Research Tool Only";
+"auth.disclaimer.message" = "This application is for research purposes only and is not approved for clinical use. Always consult qualified medical professionals for patient care decisions.";
+"auth.access.code" = "Research Access Code";
+"auth.access.code.placeholder" = "Enter access code";
+"auth.access.code.help" = "Contact your research coordinator for access";
+"auth.login.button" = "Secure Login";
+"auth.invalid.code" = "Invalid access code. Please try again.";
+"auth.footer.ce" = "CE certification pending";
+"auth.footer.copyright" = "© 2025 iGFAP Research Team";
+
+/* Triage */
+"triage.coma.title" = "Patient Assessment";
+"triage.coma.question" = "Is the patient comatose?";
+"triage.coma.help" = "Glasgow Coma Scale (GCS) < 8";
+"triage.coma.yes" = "Yes (GCS < 8)";
+"triage.coma.no" = "No (GCS ≥ 8)";
+"triage.exam.question" = "Can the patient be reliably examined?";
+"triage.exam.yes" = "Yes - Full Examination Possible";
+"triage.exam.no" = "No - Limited Data Only";
+
+/* Assessment Modules */
+"module.coma" = "Coma Module";
+"module.coma.description" = "For patients with GCS < 8 (comatose)";
+"module.limited" = "Limited Data";
+"module.limited.description" = "For patients who cannot be reliably examined";
+"module.full" = "Full Assessment";
+"module.full.description" = "Comprehensive stroke assessment";
+
+/* Patient Data Fields */
+"field.age" = "Age";
+"field.age.unit" = "years";
+"field.age.help" = "Patient age in years";
+"field.bp.systolic" = "Systolic BP";
+"field.bp.diastolic" = "Diastolic BP";
+"field.bp.unit" = "mmHg";
+"field.bp.help" = "Blood pressure measurement";
+"field.bp.error" = "Systolic BP must be greater than diastolic BP";
+"field.gfap" = "GFAP Value";
+"field.gfap.unit" = "pg/mL";
+"field.gfap.help" = "Valid range: 29-10,001 pg/mL";
+"field.gfap.error" = "GFAP value must be between 29 and 10,001 pg/mL";
+"field.fast.ed" = "FAST-ED Score";
+"field.fast.ed.help" = "Score range: 0-9";
+"field.fast.ed.calculate" = "Calculate FAST-ED Score";
+
+/* Symptoms */
+"symptom.headache" = "Headache";
+"symptom.vigilance" = "Reduced Vigilance";
+"symptom.arm.paresis" = "Arm Weakness";
+"symptom.leg.paresis" = "Leg Weakness";
+"symptom.eye.deviation" = "Eye Deviation";
+
+/* Medical History */
+"history.afib" = "Atrial Fibrillation";
+"history.anticoagulation" = "Anticoagulation (NOAC)";
+"history.antiplatelets" = "Antiplatelets";
+
+/* Results */
+"results.title" = "Assessment Results";
+"results.ich.risk" = "ICH Risk";
+"results.ich.volume" = "Estimated ICH Volume";
+"results.lvo.risk" = "LVO Risk";
+"results.drivers.title" = "Risk Factors";
+"results.confidence" = "Confidence";
+"results.new.assessment" = "New Assessment";
+"results.export.pdf" = "Export PDF Report";
+"results.stroke.centers" = "Nearby Stroke Centers";
+
+/* Risk Levels */
+"risk.low" = "Low Risk";
+"risk.medium" = "Medium Risk";
+"risk.high" = "High Risk";
+"risk.critical" = "Very High Risk";
+
+/* Volume Severity */
+"volume.small" = "Small";
+"volume.moderate" = "Moderate";
+"volume.large" = "Large";
+"volume.critical" = "Critical";
+
+/* FAST-ED Calculator */
+"fast.ed.title" = "FAST-ED Calculator";
+"fast.ed.facial" = "Facial Palsy";
+"fast.ed.facial.normal" = "Normal / Minor";
+"fast.ed.facial.partial" = "Partial";
+"fast.ed.facial.complete" = "Complete";
+"fast.ed.arm" = "Arm Weakness";
+"fast.ed.arm.normal" = "Normal / Mild";
+"fast.ed.arm.moderate" = "Moderate / Severe";
+"fast.ed.speech" = "Speech Changes";
+"fast.ed.speech.normal" = "Normal";
+"fast.ed.speech.mild" = "Mild Slurring";
+"fast.ed.speech.severe" = "Severe / Mute";
+"fast.ed.eye" = "Eye Deviation";
+"fast.ed.eye.absent" = "Absent";
+"fast.ed.eye.present" = "Present";
+"fast.ed.denial" = "Denial / Neglect";
+"fast.ed.denial.absent" = "Absent";
+"fast.ed.denial.present" = "Present";
+"fast.ed.total" = "Total Score";
+"fast.ed.lvo.risk" = "LVO Risk";
+"fast.ed.lvo.low" = "Low LVO Risk";
+"fast.ed.lvo.high" = "High LVO Risk";
+
+/* Stroke Centers */
+"centers.title" = "Stroke Centers";
+"centers.distance" = "Distance";
+"centers.type.primary" = "Primary";
+"centers.type.comprehensive" = "Comprehensive";
+"centers.directions" = "Get Directions";
+"centers.call" = "Call";
+"centers.location.error" = "Location services unavailable";
+
+/* Buttons */
+"button.submit" = "Submit Assessment";
+"button.cancel" = "Cancel";
+"button.back" = "Back";
+"button.continue" = "Continue";
+"button.done" = "Done";
+"button.close" = "Close";
+"button.logout" = "Logout";
+
+/* Errors */
+"error.title" = "Error";
+"error.network" = "Network error. Please check your connection.";
+"error.server" = "Server error. Please try again later.";
+"error.validation" = "Please check your input and try again.";
+"error.unknown" = "An unknown error occurred.";
+
+/* Loading */
+"loading.processing" = "Processing...";
+"loading.authenticating" = "Authenticating...";
+"loading.calculating" = "Calculating risk...";
+
+/* Prerequisites */
+"prerequisitesTitle" = "Prerequisites for Stroke Triage";
+"prerequisitesIntro" = "Please confirm that all of the following prerequisites are met:";
+"prerequisitesWarning" = "All prerequisites must be met to continue";
+"acuteDeficit" = "Acute (severe) neurological deficit present";
+"symptomOnset" = "Symptom onset within 6 hours";
+"noPreexisting" = "No pre-existing severe neurological deficits";
+"noTrauma" = "No traumatic brain injury present";
+
+/* General */
+"ok" = "OK";
+"yes" = "Yes";
+"no" = "No";
+"save" = "Save";
+"delete" = "Delete";
+"required" = "Required";
+"optional" = "Optional";

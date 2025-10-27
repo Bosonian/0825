@@ -1,0 +1,873 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		045ADB2530B5EB61B6B7361E /* Predictions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2D49ADE1E17C11A59DCBF3 /* Predictions.swift */; };
+		0A273EE8F40B445FA8204126 /* LocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FDBBD015334B9F33C224C8 /* LocalizedStrings.swift */; };
+		0C90B7E02D1D1470D667900E /* PredictionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD87E71EE9EEF0ACF5FA770A /* PredictionService.swift */; };
+		113EBE6EAA183F9F17DB4CFD /* iGFAPStrokeAssistantApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC935EF4A39519A3F6823AED /* iGFAPStrokeAssistantApp.swift */; };
+		143B734572F933500B9CA0B4 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 826203724FC748DCFE0BDE64 /* View+Extensions.swift */; };
+		1B8137ED209910C48A5F04FD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8550C41ADEE8098365FD086C /* LoginView.swift */; };
+		1D6E02888B2D1EDEE5FB4C25 /* ICHVolumeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC8927E691CEC9788F5AA16 /* ICHVolumeCalculator.swift */; };
+		21C3B67D2D27FBF160209577 /* StrokeCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503CD75CB51D1EFCF2863A9D /* StrokeCenter.swift */; };
+		287A09C148FBA4CFCA9AD525 /* PredictionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79959589A54348E935C89120 /* PredictionServiceTests.swift */; };
+		4EB8E31791B55B69B8D5EC3B /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66AE4C958403302F722BDDE /* PrimaryButton.swift */; };
+		4F02D9FE9AB682A3EF5AC5AF /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE228A4732A94DFCE2EFBA0A /* AppConstants.swift */; };
+		50FA850ADAE688E6C53B9CD1 /* RiskRingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFCD23311B658C053925285F /* RiskRingView.swift */; };
+		5187F301FCFB4F207C294B37 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8003D486C126B57CDB2CF8 /* APIError.swift */; };
+		5A0049732603E5E71B728862 /* PatientData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE524291077D1A8E977C41B /* PatientData.swift */; };
+		5B06907C7C47D41AAF8AF049 /* PrerequisitesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF210BB76704C4BD7E74DFF /* PrerequisitesView.swift */; };
+		64285D21CBB5CDC2F10974B4 /* IntelligentRoutingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C60FF2347FFBAF6581DD14 /* IntelligentRoutingView.swift */; };
+		6EBBC2550D5222A8552097F6 /* Assessment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB031038F768D3A246C5FA0 /* Assessment.swift */; };
+		7112BA28BA446A85C88DDB0D /* Color+Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990680DF28AE3A0F20C49B9B /* Color+Theme.swift */; };
+		74DD679544DF0E775F68BED3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0EDD0B02C82BDAE0BF2C4F8 /* MapKit.framework */; };
+		767C142B0FBA8DE77CDCE50C /* LVOModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA7A5ADB5BDC2E0D2EAC2BF /* LVOModelTests.swift */; };
+		77A813F3719BD9C023E6F5A6 /* ClinicalRecommendationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A9D4E21117AD65341B8E0F1 /* ClinicalRecommendationsView.swift */; };
+		7952E44561DA1414EAF4B5F4 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4886F83BA1141826E75AA2F /* SwiftUI.framework */; };
+		82E3B3EC8C7B410C67C68CB3 /* LVOModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5F8AC71FBB75CAA592FE813 /* LVOModel.swift */; };
+		863DB6168E7EF5D60B533257 /* PDFExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15617F8137A5682249B1E4C5 /* PDFExportService.swift */; };
+		8A229E91A64F631DB832D7E5 /* BrainVisualizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC73578EFFD6AACDAF7AB508 /* BrainVisualizationView.swift */; };
+		90901A2EDC2C20B3FBEDA7F1 /* SampleDataGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE10B3367EE31766EBEE3C5 /* SampleDataGenerator.swift */; };
+		94BA0C39CF999895F695D3CD /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EE240C94CE3FC2F8C15B6B /* String+Extensions.swift */; };
+		9501F944B6458E1DC0879329 /* LimitedAssessmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8718F9EA3EAA52FCED4EBC3B /* LimitedAssessmentView.swift */; };
+		9679A11355AE097FCC40B466 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0F8F77489EF72FEF3E1A9C /* Date+Extensions.swift */; };
+		9B61A928DF04FE9BA4656626 /* MockServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA0E6E18E3D33FC0010FD6D /* MockServiceTests.swift */; };
+		9E159BD71930A75DA9E90A41 /* StrokeCenterMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D64552A05E64C6B6C3ED5D4 /* StrokeCenterMapView.swift */; };
+		A1C319D779360EAB11004074 /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C50CF1A7D978A6C001DAC2 /* Double+Extensions.swift */; };
+		A1D09158C33A5F3F41F06E66 /* FormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C57376C306417F7E1C99E98 /* FormField.swift */; };
+		AF57301FAA2B78645A32BC72 /* FASTEDCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E15EA72AC3AE7C038EEEA60 /* FASTEDCalculatorView.swift */; };
+		B15CF9155AAD731A2CE50896 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64E4D0BE035A74461B3DA67D /* Assets.xcassets */; };
+		B18B954502D54B1382D6AE4E /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D949A8F201EB12CDEB8D0DC7 /* AppState.swift */; };
+		B398CA3C4905CB495FDB24E1 /* PDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0CF82DFA645F86F5FE02EA /* PDFKit.framework */; };
+		BAA28D6CC82C4C2A9DEFFC70 /* APIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EE4B1C843DF3F76DE9CDD5 /* APIConfiguration.swift */; };
+		BC1EA7A7CF0074D4008A7A76 /* Combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5277A31B066011E96F6B18C4 /* Combine.framework */; };
+		C075EA70209FCC5ED1D3B941 /* TriageComaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154A5E596A39EAF32AF7C344 /* TriageComaView.swift */; };
+		C22A00BEBA9B45F3ECD9BBCF /* TriageExamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 589A378A275A4D9E211CA5A4 /* TriageExamView.swift */; };
+		CB0B82C458F700775E67FE81 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 965F2551FDA9F714F74766E5 /* CoreLocation.framework */; };
+		CBCEB70706FDB039D3187C47 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99D93A07F6E860A129C8B0E6 /* Foundation.framework */; };
+		CF3B5D384E39FB95A4AE72E4 /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1390E71F8276CE66A60A4F09 /* ResultsView.swift */; };
+		D0DB3C177698D9A2F13FB9B9 /* PatientDataValidationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8F337F0118DA7032D1DAAFA /* PatientDataValidationTests.swift */; };
+		D471BF43F6FA342580158E98 /* FullAssessmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB7225A66CA17CA66B12B30 /* FullAssessmentView.swift */; };
+		D4A70E0C9EDADCF9AFAC05C3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EE0ABA572369EC713C9769D8 /* Localizable.strings */; };
+		DCF992970301AD1EE556A67C /* LocalizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF015B814340C24C4811B60 /* LocalizationManager.swift */; };
+		DF4756EBF004446E500A18C1 /* AppStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9A4C56E0A2E70EB0609F88 /* AppStateTests.swift */; };
+		E79967297B2C7DDD81C1D920 /* EndToEndWorkflowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BC0EACBE2AE5836EE37E120 /* EndToEndWorkflowTests.swift */; };
+		EB93D3C6D65DB51997DC6CBD /* ComaAssessmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F8C63FB2B57F4A658CDD10 /* ComaAssessmentView.swift */; };
+		EBDDD654722F9C504DDB2706 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E8A9E2805DBD528F3BB993E6 /* Localizable.strings */; };
+		ED7B7E498A454D16A70BB3B5 /* AppNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB936B0BACD52503A1FD660C /* AppNavigationBar.swift */; };
+		F25BF830B1112F37358C5ED5 /* MockPredictionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9FAD918283A448B9AE0A04 /* MockPredictionService.swift */; };
+		FC43A7CB7C4C734D93548A7C /* ICHVolumeCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42ED5C46635CA3F6225FE1C3 /* ICHVolumeCalculatorTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B23ECE10518100BBD7D1396A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6247FB2B318F0240FB62CC63 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 64516937F0D4A5B1C3988D00;
+			remoteInfo = iGFAPStrokeAssistant;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0B9A4C56E0A2E70EB0609F88 /* AppStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateTests.swift; sourceTree = "<group>"; };
+		0D2D49ADE1E17C11A59DCBF3 /* Predictions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Predictions.swift; sourceTree = "<group>"; };
+		0E15EA72AC3AE7C038EEEA60 /* FASTEDCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FASTEDCalculatorView.swift; sourceTree = "<group>"; };
+		1390E71F8276CE66A60A4F09 /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
+		154A5E596A39EAF32AF7C344 /* TriageComaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriageComaView.swift; sourceTree = "<group>"; };
+		15617F8137A5682249B1E4C5 /* PDFExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExportService.swift; sourceTree = "<group>"; };
+		1C57376C306417F7E1C99E98 /* FormField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormField.swift; sourceTree = "<group>"; };
+		1EC8927E691CEC9788F5AA16 /* ICHVolumeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICHVolumeCalculator.swift; sourceTree = "<group>"; };
+		1F0CF82DFA645F86F5FE02EA /* PDFKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PDFKit.framework; sourceTree = "<group>"; };
+		25EE4B1C843DF3F76DE9CDD5 /* APIConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfiguration.swift; sourceTree = "<group>"; };
+		31C60FF2347FFBAF6581DD14 /* IntelligentRoutingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntelligentRoutingView.swift; sourceTree = "<group>"; };
+		33EE240C94CE3FC2F8C15B6B /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		39F8C63FB2B57F4A658CDD10 /* ComaAssessmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComaAssessmentView.swift; sourceTree = "<group>"; };
+		42ED5C46635CA3F6225FE1C3 /* ICHVolumeCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICHVolumeCalculatorTests.swift; sourceTree = "<group>"; };
+		484A9D604C2C75DE85277850 /* iGFAPStrokeAssistantTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = iGFAPStrokeAssistantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A2A262A7E64193CE9A6BF95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4AF015B814340C24C4811B60 /* LocalizationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizationManager.swift; sourceTree = "<group>"; };
+		4BB031038F768D3A246C5FA0 /* Assessment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assessment.swift; sourceTree = "<group>"; };
+		4FA0E6E18E3D33FC0010FD6D /* MockServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockServiceTests.swift; sourceTree = "<group>"; };
+		503CD75CB51D1EFCF2863A9D /* StrokeCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeCenter.swift; sourceTree = "<group>"; };
+		5277A31B066011E96F6B18C4 /* Combine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Combine.framework; sourceTree = "<group>"; };
+		589A378A275A4D9E211CA5A4 /* TriageExamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriageExamView.swift; sourceTree = "<group>"; };
+		5BB7225A66CA17CA66B12B30 /* FullAssessmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullAssessmentView.swift; sourceTree = "<group>"; };
+		5D0F8F77489EF72FEF3E1A9C /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		64E4D0BE035A74461B3DA67D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6A9D4E21117AD65341B8E0F1 /* ClinicalRecommendationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClinicalRecommendationsView.swift; sourceTree = "<group>"; };
+		6BC0EACBE2AE5836EE37E120 /* EndToEndWorkflowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndToEndWorkflowTests.swift; sourceTree = "<group>"; };
+		75C50CF1A7D978A6C001DAC2 /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
+		79959589A54348E935C89120 /* PredictionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionServiceTests.swift; sourceTree = "<group>"; };
+		826203724FC748DCFE0BDE64 /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		8550C41ADEE8098365FD086C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		8718F9EA3EAA52FCED4EBC3B /* LimitedAssessmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitedAssessmentView.swift; sourceTree = "<group>"; };
+		965F2551FDA9F714F74766E5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CoreLocation.framework; sourceTree = "<group>"; };
+		990680DF28AE3A0F20C49B9B /* Color+Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Theme.swift"; sourceTree = "<group>"; };
+		99D93A07F6E860A129C8B0E6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Foundation.framework; sourceTree = "<group>"; };
+		9D64552A05E64C6B6C3ED5D4 /* StrokeCenterMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeCenterMapView.swift; sourceTree = "<group>"; };
+		9EC4934246DC6329AB9663B0 /* iGFAPStrokeAssistant.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = iGFAPStrokeAssistant.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB936B0BACD52503A1FD660C /* AppNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigationBar.swift; sourceTree = "<group>"; };
+		ACF210BB76704C4BD7E74DFF /* PrerequisitesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrerequisitesView.swift; sourceTree = "<group>"; };
+		BEE524291077D1A8E977C41B /* PatientData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientData.swift; sourceTree = "<group>"; };
+		C4886F83BA1141826E75AA2F /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftUI.framework; sourceTree = "<group>"; };
+		C5F8AC71FBB75CAA592FE813 /* LVOModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LVOModel.swift; sourceTree = "<group>"; };
+		CC73578EFFD6AACDAF7AB508 /* BrainVisualizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrainVisualizationView.swift; sourceTree = "<group>"; };
+		CC935EF4A39519A3F6823AED /* iGFAPStrokeAssistantApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iGFAPStrokeAssistantApp.swift; sourceTree = "<group>"; };
+		CE9FAD918283A448B9AE0A04 /* MockPredictionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPredictionService.swift; sourceTree = "<group>"; };
+		CEA7A5ADB5BDC2E0D2EAC2BF /* LVOModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LVOModelTests.swift; sourceTree = "<group>"; };
+		D8F337F0118DA7032D1DAAFA /* PatientDataValidationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDataValidationTests.swift; sourceTree = "<group>"; };
+		D949A8F201EB12CDEB8D0DC7 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		DF8003D486C126B57CDB2CF8 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		E0EDD0B02C82BDAE0BF2C4F8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MapKit.framework; sourceTree = "<group>"; };
+		E66AE4C958403302F722BDDE /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		E8A9E2805DBD528F3BB993E6 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EE0ABA572369EC713C9769D8 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		EE228A4732A94DFCE2EFBA0A /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		F7FDBBD015334B9F33C224C8 /* LocalizedStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStrings.swift; sourceTree = "<group>"; };
+		FCE10B3367EE31766EBEE3C5 /* SampleDataGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleDataGenerator.swift; sourceTree = "<group>"; };
+		FD87E71EE9EEF0ACF5FA770A /* PredictionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionService.swift; sourceTree = "<group>"; };
+		FFCD23311B658C053925285F /* RiskRingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskRingView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		89C3425BCCB719DD07038A9E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7952E44561DA1414EAF4B5F4 /* SwiftUI.framework in Frameworks */,
+				CBCEB70706FDB039D3187C47 /* Foundation.framework in Frameworks */,
+				BC1EA7A7CF0074D4008A7A76 /* Combine.framework in Frameworks */,
+				74DD679544DF0E775F68BED3 /* MapKit.framework in Frameworks */,
+				CB0B82C458F700775E67FE81 /* CoreLocation.framework in Frameworks */,
+				B398CA3C4905CB495FDB24E1 /* PDFKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		02486AE4E86E622DF4147109 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				B220FC5BF2E5CFCA1CC920DE /* Models */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		196BAEFCFD33053E17B1C124 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				FCE10B3367EE31766EBEE3C5 /* SampleDataGenerator.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		1C4F55799BD85DA4C14701B5 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				4AF015B814340C24C4811B60 /* LocalizationManager.swift */,
+				F7FDBBD015334B9F33C224C8 /* LocalizedStrings.swift */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
+		20DB42ED61D156C1CA0A3406 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ACF210BB76704C4BD7E74DFF /* PrerequisitesView.swift */,
+				154A5E596A39EAF32AF7C344 /* TriageComaView.swift */,
+				589A378A275A4D9E211CA5A4 /* TriageExamView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2936AE99A144C179E61F8C97 /* Calculators */ = {
+			isa = PBXGroup;
+			children = (
+				1EC8927E691CEC9788F5AA16 /* ICHVolumeCalculator.swift */,
+				C5F8AC71FBB75CAA592FE813 /* LVOModel.swift */,
+			);
+			path = Calculators;
+			sourceTree = "<group>";
+		};
+		4266CC4F38A53CAF40DD809E /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				F2376CD2A728DC3E60A1D4DC /* Network */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		4721AE489AEFE5630EA4DA4C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8550C41ADEE8098365FD086C /* LoginView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		503328C30A7918EAFA4850F2 /* Results */ = {
+			isa = PBXGroup;
+			children = (
+				8BF1753900E0068E68C758A0 /* Services */,
+				53800086C0057B5AFA10242F /* Views */,
+			);
+			path = Results;
+			sourceTree = "<group>";
+		};
+		53800086C0057B5AFA10242F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CC73578EFFD6AACDAF7AB508 /* BrainVisualizationView.swift */,
+				6A9D4E21117AD65341B8E0F1 /* ClinicalRecommendationsView.swift */,
+				31C60FF2347FFBAF6581DD14 /* IntelligentRoutingView.swift */,
+				1390E71F8276CE66A60A4F09 /* ResultsView.swift */,
+				FFCD23311B658C053925285F /* RiskRingView.swift */,
+				9D64552A05E64C6B6C3ED5D4 /* StrokeCenterMapView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		56E41259997846D115FBF50C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				39F8C63FB2B57F4A658CDD10 /* ComaAssessmentView.swift */,
+				0E15EA72AC3AE7C038EEEA60 /* FASTEDCalculatorView.swift */,
+				5BB7225A66CA17CA66B12B30 /* FullAssessmentView.swift */,
+				8718F9EA3EAA52FCED4EBC3B /* LimitedAssessmentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5E0160A6D721A30C79DA6073 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				990680DF28AE3A0F20C49B9B /* Color+Theme.swift */,
+				5D0F8F77489EF72FEF3E1A9C /* Date+Extensions.swift */,
+				75C50CF1A7D978A6C001DAC2 /* Double+Extensions.swift */,
+				33EE240C94CE3FC2F8C15B6B /* String+Extensions.swift */,
+				826203724FC748DCFE0BDE64 /* View+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		6291BC3D0A724852BD25C4C5 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				D949A8F201EB12CDEB8D0DC7 /* AppState.swift */,
+				CC935EF4A39519A3F6823AED /* iGFAPStrokeAssistantApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		6A6D1FF8E3998E56EDDC02AE /* Triage */ = {
+			isa = PBXGroup;
+			children = (
+				20DB42ED61D156C1CA0A3406 /* Views */,
+			);
+			path = Triage;
+			sourceTree = "<group>";
+		};
+		6A94ED098BF5535D1D2B6C41 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				F60DF47E48617CC83EBA0783 /* Components */,
+				5E0160A6D721A30C79DA6073 /* Extensions */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		6DD9D6931E277653471D8B5A /* iGFAPStrokeAssistant */ = {
+			isa = PBXGroup;
+			children = (
+				64E4D0BE035A74461B3DA67D /* Assets.xcassets */,
+				4A2A262A7E64193CE9A6BF95 /* Info.plist */,
+				6291BC3D0A724852BD25C4C5 /* App */,
+				DB6130D501386E79412DDD45 /* Core */,
+				84BF3A469AF4FF8C48DCF696 /* Features */,
+				8979C3CE76D8B46F72C3B7FA /* Medical */,
+				CEAA207D3A95753E297AA652 /* Resources */,
+			);
+			name = iGFAPStrokeAssistant;
+			path = iGFAPStrokeAssistant;
+			sourceTree = "<group>";
+		};
+		82B806864194CF2CA36C5908 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				4721AE489AEFE5630EA4DA4C /* Views */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		84BF3A469AF4FF8C48DCF696 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				93BC97BE621FBB7AB212A262 /* Assessment */,
+				82B806864194CF2CA36C5908 /* Authentication */,
+				503328C30A7918EAFA4850F2 /* Results */,
+				6A6D1FF8E3998E56EDDC02AE /* Triage */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		8979C3CE76D8B46F72C3B7FA /* Medical */ = {
+			isa = PBXGroup;
+			children = (
+				2936AE99A144C179E61F8C97 /* Calculators */,
+			);
+			path = Medical;
+			sourceTree = "<group>";
+		};
+		8BF1753900E0068E68C758A0 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				15617F8137A5682249B1E4C5 /* PDFExportService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		93BC97BE621FBB7AB212A262 /* Assessment */ = {
+			isa = PBXGroup;
+			children = (
+				56E41259997846D115FBF50C /* Views */,
+			);
+			path = Assessment;
+			sourceTree = "<group>";
+		};
+		A369D2F2C3BEA237E52DE27E /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				CE9FAD918283A448B9AE0A04 /* MockPredictionService.swift */,
+				4FA0E6E18E3D33FC0010FD6D /* MockServiceTests.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		B220FC5BF2E5CFCA1CC920DE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4BB031038F768D3A246C5FA0 /* Assessment.swift */,
+				BEE524291077D1A8E977C41B /* PatientData.swift */,
+				0D2D49ADE1E17C11A59DCBF3 /* Predictions.swift */,
+				503CD75CB51D1EFCF2863A9D /* StrokeCenter.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BF5187E6F4397CA851792101 = {
+			isa = PBXGroup;
+			children = (
+				6DD9D6931E277653471D8B5A /* iGFAPStrokeAssistant */,
+				FC8EDDDC3C79FF45A6D7343B /* iGFAPStrokeAssistantTests */,
+				C4177A3B266CB8DE493535A2 /* Frameworks */,
+				EF3B2D246435674FA0A822BE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C4177A3B266CB8DE493535A2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5277A31B066011E96F6B18C4 /* Combine.framework */,
+				965F2551FDA9F714F74766E5 /* CoreLocation.framework */,
+				99D93A07F6E860A129C8B0E6 /* Foundation.framework */,
+				E0EDD0B02C82BDAE0BF2C4F8 /* MapKit.framework */,
+				1F0CF82DFA645F86F5FE02EA /* PDFKit.framework */,
+				C4886F83BA1141826E75AA2F /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CEAA207D3A95753E297AA652 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EE0ABA572369EC713C9769D8 /* Localizable.strings */,
+				E8A9E2805DBD528F3BB993E6 /* Localizable.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		DB6130D501386E79412DDD45 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				EE470F674F20D39A2B554E09 /* Configuration */,
+				4266CC4F38A53CAF40DD809E /* Data */,
+				02486AE4E86E622DF4147109 /* Domain */,
+				1C4F55799BD85DA4C14701B5 /* Localization */,
+				6A94ED098BF5535D1D2B6C41 /* UI */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		EE470F674F20D39A2B554E09 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				EE228A4732A94DFCE2EFBA0A /* AppConstants.swift */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		EF3B2D246435674FA0A822BE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9EC4934246DC6329AB9663B0 /* iGFAPStrokeAssistant.app */,
+				484A9D604C2C75DE85277850 /* iGFAPStrokeAssistantTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F2376CD2A728DC3E60A1D4DC /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				25EE4B1C843DF3F76DE9CDD5 /* APIConfiguration.swift */,
+				DF8003D486C126B57CDB2CF8 /* APIError.swift */,
+				FD87E71EE9EEF0ACF5FA770A /* PredictionService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		F60DF47E48617CC83EBA0783 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				AB936B0BACD52503A1FD660C /* AppNavigationBar.swift */,
+				1C57376C306417F7E1C99E98 /* FormField.swift */,
+				E66AE4C958403302F722BDDE /* PrimaryButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		FC8EDDDC3C79FF45A6D7343B /* iGFAPStrokeAssistantTests */ = {
+			isa = PBXGroup;
+			children = (
+				0B9A4C56E0A2E70EB0609F88 /* AppStateTests.swift */,
+				6BC0EACBE2AE5836EE37E120 /* EndToEndWorkflowTests.swift */,
+				42ED5C46635CA3F6225FE1C3 /* ICHVolumeCalculatorTests.swift */,
+				CEA7A5ADB5BDC2E0D2EAC2BF /* LVOModelTests.swift */,
+				D8F337F0118DA7032D1DAAFA /* PatientDataValidationTests.swift */,
+				79959589A54348E935C89120 /* PredictionServiceTests.swift */,
+				196BAEFCFD33053E17B1C124 /* Helpers */,
+				A369D2F2C3BEA237E52DE27E /* Mocks */,
+			);
+			name = iGFAPStrokeAssistantTests;
+			path = iGFAPStrokeAssistantTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		64516937F0D4A5B1C3988D00 /* iGFAPStrokeAssistant */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CDE8D37CB0CD4F50DEA88290 /* Build configuration list for PBXNativeTarget "iGFAPStrokeAssistant" */;
+			buildPhases = (
+				7E48629377CB576153D2B59B /* Sources */,
+				D9CFBBF38EEDE9F2575D224F /* Resources */,
+				89C3425BCCB719DD07038A9E /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iGFAPStrokeAssistant;
+			packageProductDependencies = (
+			);
+			productName = iGFAPStrokeAssistant;
+			productReference = 9EC4934246DC6329AB9663B0 /* iGFAPStrokeAssistant.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C8D2421F50E0F86CBB278B51 /* iGFAPStrokeAssistantTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4694656D31F321DAD8A15C42 /* Build configuration list for PBXNativeTarget "iGFAPStrokeAssistantTests" */;
+			buildPhases = (
+				18D0D21737A3B87DCB065123 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C332C9A3427B35AF47EF2F5C /* PBXTargetDependency */,
+			);
+			name = iGFAPStrokeAssistantTests;
+			packageProductDependencies = (
+			);
+			productName = iGFAPStrokeAssistantTests;
+			productReference = 484A9D604C2C75DE85277850 /* iGFAPStrokeAssistantTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6247FB2B318F0240FB62CC63 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					64516937F0D4A5B1C3988D00 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					C8D2421F50E0F86CBB278B51 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 143C4D279A5CB24A0C560DF2 /* Build configuration list for PBXProject "iGFAPStrokeAssistant" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				de,
+				en,
+			);
+			mainGroup = BF5187E6F4397CA851792101;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				64516937F0D4A5B1C3988D00 /* iGFAPStrokeAssistant */,
+				C8D2421F50E0F86CBB278B51 /* iGFAPStrokeAssistantTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D9CFBBF38EEDE9F2575D224F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B15CF9155AAD731A2CE50896 /* Assets.xcassets in Resources */,
+				D4A70E0C9EDADCF9AFAC05C3 /* Localizable.strings in Resources */,
+				EBDDD654722F9C504DDB2706 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		18D0D21737A3B87DCB065123 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF4756EBF004446E500A18C1 /* AppStateTests.swift in Sources */,
+				E79967297B2C7DDD81C1D920 /* EndToEndWorkflowTests.swift in Sources */,
+				FC43A7CB7C4C734D93548A7C /* ICHVolumeCalculatorTests.swift in Sources */,
+				767C142B0FBA8DE77CDCE50C /* LVOModelTests.swift in Sources */,
+				F25BF830B1112F37358C5ED5 /* MockPredictionService.swift in Sources */,
+				9B61A928DF04FE9BA4656626 /* MockServiceTests.swift in Sources */,
+				D0DB3C177698D9A2F13FB9B9 /* PatientDataValidationTests.swift in Sources */,
+				287A09C148FBA4CFCA9AD525 /* PredictionServiceTests.swift in Sources */,
+				90901A2EDC2C20B3FBEDA7F1 /* SampleDataGenerator.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7E48629377CB576153D2B59B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BAA28D6CC82C4C2A9DEFFC70 /* APIConfiguration.swift in Sources */,
+				5187F301FCFB4F207C294B37 /* APIError.swift in Sources */,
+				4F02D9FE9AB682A3EF5AC5AF /* AppConstants.swift in Sources */,
+				ED7B7E498A454D16A70BB3B5 /* AppNavigationBar.swift in Sources */,
+				B18B954502D54B1382D6AE4E /* AppState.swift in Sources */,
+				6EBBC2550D5222A8552097F6 /* Assessment.swift in Sources */,
+				8A229E91A64F631DB832D7E5 /* BrainVisualizationView.swift in Sources */,
+				77A813F3719BD9C023E6F5A6 /* ClinicalRecommendationsView.swift in Sources */,
+				7112BA28BA446A85C88DDB0D /* Color+Theme.swift in Sources */,
+				EB93D3C6D65DB51997DC6CBD /* ComaAssessmentView.swift in Sources */,
+				9679A11355AE097FCC40B466 /* Date+Extensions.swift in Sources */,
+				A1C319D779360EAB11004074 /* Double+Extensions.swift in Sources */,
+				AF57301FAA2B78645A32BC72 /* FASTEDCalculatorView.swift in Sources */,
+				A1D09158C33A5F3F41F06E66 /* FormField.swift in Sources */,
+				D471BF43F6FA342580158E98 /* FullAssessmentView.swift in Sources */,
+				1D6E02888B2D1EDEE5FB4C25 /* ICHVolumeCalculator.swift in Sources */,
+				64285D21CBB5CDC2F10974B4 /* IntelligentRoutingView.swift in Sources */,
+				82E3B3EC8C7B410C67C68CB3 /* LVOModel.swift in Sources */,
+				9501F944B6458E1DC0879329 /* LimitedAssessmentView.swift in Sources */,
+				DCF992970301AD1EE556A67C /* LocalizationManager.swift in Sources */,
+				0A273EE8F40B445FA8204126 /* LocalizedStrings.swift in Sources */,
+				1B8137ED209910C48A5F04FD /* LoginView.swift in Sources */,
+				863DB6168E7EF5D60B533257 /* PDFExportService.swift in Sources */,
+				5A0049732603E5E71B728862 /* PatientData.swift in Sources */,
+				0C90B7E02D1D1470D667900E /* PredictionService.swift in Sources */,
+				045ADB2530B5EB61B6B7361E /* Predictions.swift in Sources */,
+				5B06907C7C47D41AAF8AF049 /* PrerequisitesView.swift in Sources */,
+				4EB8E31791B55B69B8D5EC3B /* PrimaryButton.swift in Sources */,
+				CF3B5D384E39FB95A4AE72E4 /* ResultsView.swift in Sources */,
+				50FA850ADAE688E6C53B9CD1 /* RiskRingView.swift in Sources */,
+				94BA0C39CF999895F695D3CD /* String+Extensions.swift in Sources */,
+				21C3B67D2D27FBF160209577 /* StrokeCenter.swift in Sources */,
+				9E159BD71930A75DA9E90A41 /* StrokeCenterMapView.swift in Sources */,
+				C075EA70209FCC5ED1D3B941 /* TriageComaView.swift in Sources */,
+				C22A00BEBA9B45F3ECD9BBCF /* TriageExamView.swift in Sources */,
+				143B734572F933500B9CA0B4 /* View+Extensions.swift in Sources */,
+				113EBE6EAA183F9F17DB4CFD /* iGFAPStrokeAssistantApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C332C9A3427B35AF47EF2F5C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 64516937F0D4A5B1C3988D00 /* iGFAPStrokeAssistant */;
+			targetProxy = B23ECE10518100BBD7D1396A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		4DE8F9FB8196B27E90D7791E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\".\"",
+				);
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = iGFAPStrokeAssistant/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.igfap.iGFAPStrokeAssistant;
+				PRODUCT_NAME = iGFAPStrokeAssistant;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8915C4BF5459BD971D4BF6C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.igfap.iGFAPStrokeAssistantTests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iGFAPStrokeAssistant.app/iGFAPStrokeAssistant";
+			};
+			name = Release;
+		};
+		8B346A9BB03B98AD728EB6CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		C35E3E7FDD4DB97DD64E038A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		C51834963184105E155E05B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.igfap.iGFAPStrokeAssistantTests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iGFAPStrokeAssistant.app/iGFAPStrokeAssistant";
+			};
+			name = Debug;
+		};
+		CDCB2970B239091AA0E8684C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\".\"",
+				);
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = iGFAPStrokeAssistant/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.igfap.iGFAPStrokeAssistant;
+				PRODUCT_NAME = iGFAPStrokeAssistant;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.9;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		143C4D279A5CB24A0C560DF2 /* Build configuration list for PBXProject "iGFAPStrokeAssistant" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C35E3E7FDD4DB97DD64E038A /* Debug */,
+				8B346A9BB03B98AD728EB6CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4694656D31F321DAD8A15C42 /* Build configuration list for PBXNativeTarget "iGFAPStrokeAssistantTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C51834963184105E155E05B2 /* Debug */,
+				8915C4BF5459BD971D4BF6C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		CDE8D37CB0CD4F50DEA88290 /* Build configuration list for PBXNativeTarget "iGFAPStrokeAssistant" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DE8F9FB8196B27E90D7791E /* Debug */,
+				CDCB2970B239091AA0E8684C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6247FB2B318F0240FB62CC63 /* Project object */;
+}
