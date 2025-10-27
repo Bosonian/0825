@@ -30,6 +30,7 @@ struct FullAssessmentView: View {
     @State private var antiplatelets: Bool = false
 
     @State private var showFASTEDCalculator = false
+    @State private var fastEDAutoPopulated = false // Track if symptoms were auto-populated
 
     var isValid: Bool {
         guard let age = Int(ageText),
@@ -49,40 +50,46 @@ struct FullAssessmentView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 24) {
+        VStack(spacing: 0) {
+            AppNavigationBar(showBackButton: true, showHomeButton: false)
+
+            ScrollView {
+                VStack(spacing: 24) {
                 // Header
                 VStack(spacing: 12) {
                     Image(systemName: "doc.text.fill.badge.plus")
                         .font(.system(size: 50))
                         .foregroundColor(.green)
 
-                    Text("Full Assessment")
+                    Text("fullAssessment".localized)
                         .font(.title)
                         .fontWeight(.bold)
+                        .minimumScaleFactor(0.7)
 
-                    Text("Comprehensive stroke evaluation")
+                    Text("comprehensiveStrokeEvaluation".localized)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
+                        .minimumScaleFactor(0.8)
                 }
                 .padding(.top, 20)
 
                 // Demographics
                 Group {
-                    FormField(title: "Age", icon: "person.fill", placeholder: "Years", text: $ageText, keyboardType: .numberPad, unit: "years")
+                    FormField(title: "age".localized, icon: "person.fill", placeholder: "years".localized, text: $ageText, keyboardType: .numberPad, unit: "years".localized)
 
                     VStack(alignment: .leading, spacing: 12) {
-                        Label("Blood Pressure", systemImage: "heart.fill")
+                        Label("bloodPressure".localized, systemImage: "heart.fill")
                             .font(.headline)
+                            .minimumScaleFactor(0.8)
                         HStack(spacing: 12) {
-                            TextField("Systolic", text: $systolicText)
+                            TextField("systolic".localized, text: $systolicText)
                                 .keyboardType(.numberPad)
                                 .textFieldStyle(.roundedBorder)
                             Text("/")
-                            TextField("Diastolic", text: $diastolicText)
+                            TextField("diastolic".localized, text: $diastolicText)
                                 .keyboardType(.numberPad)
                                 .textFieldStyle(.roundedBorder)
-                            Text("mmHg")
+                            Text("mmHg".localized)
                                 .foregroundColor(.secondary)
                         }
                     }
@@ -90,28 +97,42 @@ struct FullAssessmentView: View {
                     .background(Color.gray.opacity(0.05))
                     .cornerRadius(12)
 
-                    FormField(title: "GFAP", icon: "drop.fill", placeholder: "29-10,001", text: $gfapText, keyboardType: .decimalPad, unit: "pg/mL")
+                    FormField(title: "gfapValue".localized, icon: "drop.fill", placeholder: "29-10,001", text: $gfapText, keyboardType: .decimalPad, unit: "pgml".localized)
                 }
 
                 // FAST-ED Score
                 VStack(alignment: .leading, spacing: 12) {
-                    Label("FAST-ED Score", systemImage: "chart.bar.fill")
+                    Label("fastEdScore".localized, systemImage: "chart.bar.fill")
                         .font(.headline)
+                        .minimumScaleFactor(0.8)
 
-                    HStack {
-                        TextField("0-9", text: $fastEDText)
-                            .keyboardType(.numberPad)
-                            .textFieldStyle(.roundedBorder)
-
-                        Button("Calculate") {
-                            showFASTEDCalculator = true
+                    Button(action: {
+                        showFASTEDCalculator = true
+                    }) {
+                        HStack {
+                            Text(fastEDText.isEmpty ? "0-9" : fastEDText)
+                                .foregroundColor(fastEDText.isEmpty ? .gray : .primary)
+                            Spacer()
                         }
-                        .buttonStyle(.borderedProminent)
+                        .padding()
+                        .background(Color(UIColor.systemBackground))
+                        .cornerRadius(8)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(Color.gray.opacity(0.3), lineWidth: 1)
+                        )
                     }
+                    .buttonStyle(.plain)
 
-                    Text("Field Assessment Stroke Triage for Emergency Destination")
+                    Text("tapToCalculate".localized)
+                        .font(.caption)
+                        .foregroundColor(.blue)
+                        .fixedSize(horizontal: false, vertical: true)
+
+                    Text("fastedFullName".localized)
                         .font(.caption)
                         .foregroundColor(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
                 .padding()
                 .background(Color.gray.opacity(0.05))
@@ -119,14 +140,13 @@ struct FullAssessmentView: View {
 
                 // Symptoms
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("Symptoms")
+                    Text("symptoms".localized)
                         .font(.headline)
+                        .minimumScaleFactor(0.8)
 
-                    Toggle("Headache", isOn: $headache)
-                    Toggle("Vigilance Reduction", isOn: $vigilanceReduction)
-                    Toggle("Arm Paresis", isOn: $armParesis)
-                    Toggle("Leg Paresis", isOn: $legParesis)
-                    Toggle("Eye Deviation", isOn: $eyeDeviation)
+                    Toggle("headache".localized, isOn: $headache)
+                    Toggle("reducedConsciousness".localized, isOn: $vigilanceReduction)
+                    Toggle("legParesis".localized, isOn: $legParesis)
                 }
                 .padding()
                 .background(Color.gray.opacity(0.05))
@@ -134,12 +154,13 @@ struct FullAssessmentView: View {
 
                 // Medical History
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("Medical History")
+                    Text("medicalHistory".localized)
                         .font(.headline)
+                        .minimumScaleFactor(0.8)
 
-                    Toggle("Atrial Fibrillation", isOn: $atrialFib)
-                    Toggle("Anticoagulated (NOAK)", isOn: $anticoagulated)
-                    Toggle("Antiplatelets", isOn: $antiplatelets)
+                    Toggle("atrialFibrillation".localized, isOn: $atrialFib)
+                    Toggle("anticoagulated".localized, isOn: $anticoagulated)
+                    Toggle("antiplatelets".localized, isOn: $antiplatelets)
                 }
                 .padding()
                 .background(Color.gray.opacity(0.05))
@@ -149,7 +170,8 @@ struct FullAssessmentView: View {
                 Button(action: submitAssessment) {
                     HStack {
                         Image(systemName: "waveform.path.ecg")
-                        Text("Calculate ICH & LVO Risk")
+                        Text("calculateICHLVORisk".localized)
+                            .minimumScaleFactor(0.75)
                     }
                     .font(.headline)
                     .foregroundColor(.white)
@@ -167,14 +189,14 @@ struct FullAssessmentView: View {
                     Button(action: { appState.goBack() }) {
                         HStack {
                             Image(systemName: "chevron.left")
-                            Text("Back")
+                            Text("back".localized)
                         }
                     }
                     Spacer()
                     Button(action: { appState.reset() }) {
                         HStack {
                             Image(systemName: "house")
-                            Text("Home")
+                            Text("home".localized)
                         }
                     }
                 }
@@ -182,9 +204,16 @@ struct FullAssessmentView: View {
                 .foregroundColor(.blue)
             }
             .padding()
+            }
         }
+        .edgesIgnoringSafeArea(.top)
         .sheet(isPresented: $showFASTEDCalculator) {
-            FASTEDCalculatorView(score: $fastEDText)
+            FASTEDCalculatorView(score: $fastEDText) { result in
+                // Auto-populate symptoms from FAST-ED
+                armParesis = result.hasArmWeakness
+                eyeDeviation = result.hasEyeDeviation
+                fastEDAutoPopulated = true
+            }
         }
     }
 
@@ -207,40 +236,6 @@ struct FullAssessmentView: View {
 
         Task {
             await appState.submitFullAssessment()
-        }
-    }
-}
-
-struct FASTEDCalculatorView: View {
-    @Environment(\.dismiss) var dismiss
-    @Binding var score: String
-    @State private var calculatedScore = 0
-
-    var body: some View {
-        NavigationView {
-            VStack {
-                Text("FAST-ED Calculator")
-                    .font(.title)
-                    .padding()
-
-                Text("Score: \(calculatedScore)")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .padding()
-
-                Spacer()
-
-                Button("Use Score") {
-                    score = "\(calculatedScore)"
-                    dismiss()
-                }
-                .buttonStyle(.borderedProminent)
-            }
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
-                }
-            }
         }
     }
 }

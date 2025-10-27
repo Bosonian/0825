@@ -32,22 +32,29 @@ struct LimitedAssessmentView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 24) {
-                // Header
-                VStack(spacing: 12) {
+        VStack(spacing: 0) {
+            AppNavigationBar(showBackButton: true, showHomeButton: false)
+
+            ScrollView {
+                VStack(spacing: 24) {
+                    // Header
+                    VStack(spacing: 12) {
                     Image(systemName: "doc.text.fill")
                         .font(.system(size: 50))
                         .foregroundColor(.orange)
 
-                    Text("Limited Data Module")
+                    Text("limitedDataModule".localized)
                         .font(.title)
                         .fontWeight(.bold)
+                        .minimumScaleFactor(0.7)
+                        .lineLimit(2)
 
-                    Text("For patients who cannot be fully examined")
+                    Text("forPatientsCannotExam".localized)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
+                        .minimumScaleFactor(0.8)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
                 .padding(.top, 20)
 
@@ -55,41 +62,43 @@ struct LimitedAssessmentView: View {
                 VStack(spacing: 20) {
                     // Age
                     FormField(
-                        title: "Age",
+                        title: "age".localized,
                         icon: "person.fill",
-                        placeholder: "Years",
+                        placeholder: "years".localized,
                         text: $ageText,
                         keyboardType: .numberPad,
-                        unit: "years"
+                        unit: "years".localized
                     )
 
                     // Blood Pressure
                     VStack(alignment: .leading, spacing: 12) {
-                        Label("Blood Pressure", systemImage: "heart.fill")
+                        Label("bloodPressure".localized, systemImage: "heart.fill")
                             .font(.headline)
+                            .minimumScaleFactor(0.8)
 
                         HStack(spacing: 12) {
-                            TextField("Systolic", text: $systolicText)
+                            TextField("systolic".localized, text: $systolicText)
                                 .keyboardType(.numberPad)
                                 .textFieldStyle(.roundedBorder)
 
                             Text("/")
                                 .foregroundColor(.secondary)
 
-                            TextField("Diastolic", text: $diastolicText)
+                            TextField("diastolic".localized, text: $diastolicText)
                                 .keyboardType(.numberPad)
                                 .textFieldStyle(.roundedBorder)
 
-                            Text("mmHg")
+                            Text("mmHg".localized)
                                 .foregroundColor(.secondary)
                         }
 
                         if let systolic = Int(systolicText),
                            let diastolic = Int(diastolicText),
                            systolic <= diastolic {
-                            Text("⚠️ Systolic must be greater than diastolic")
+                            Text("systolicGreaterThanDiastolic".localized)
                                 .font(.caption)
                                 .foregroundColor(.red)
+                                .fixedSize(horizontal: false, vertical: true)
                         }
                     }
                     .padding()
@@ -98,27 +107,24 @@ struct LimitedAssessmentView: View {
 
                     // GFAP
                     FormField(
-                        title: "GFAP Value",
+                        title: "gfapValue".localized,
                         icon: "drop.fill",
                         placeholder: "29 - 10,001",
                         text: $gfapText,
                         keyboardType: .decimalPad,
-                        unit: "pg/mL"
+                        unit: "pgml".localized
                     )
 
                     // Vigilance Reduction Toggle
                     VStack(alignment: .leading, spacing: 12) {
-                        Label("Neurological Status", systemImage: "brain")
+                        Label("neurologicalStatus".localized, systemImage: "brain")
                             .font(.headline)
+                            .minimumScaleFactor(0.8)
 
                         Toggle(isOn: $vigilanceReduction) {
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text("Vigilance Reduction")
-                                    .font(.subheadline)
-                                Text("Vigilanzminderung")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                            }
+                            Text("reducedConsciousness".localized)
+                                .font(.subheadline)
+                                .minimumScaleFactor(0.8)
                         }
                         .tint(.blue)
                     }
@@ -131,7 +137,8 @@ struct LimitedAssessmentView: View {
                 Button(action: submitAssessment) {
                     HStack {
                         Image(systemName: "chart.bar.fill")
-                        Text("Calculate ICH Risk")
+                        Text("calculateICHRisk".localized)
+                            .minimumScaleFactor(0.8)
                     }
                     .font(.headline)
                     .foregroundColor(.white)
@@ -151,7 +158,7 @@ struct LimitedAssessmentView: View {
                     Button(action: { appState.goBack() }) {
                         HStack {
                             Image(systemName: "chevron.left")
-                            Text("Back")
+                            Text("back".localized)
                         }
                     }
 
@@ -160,7 +167,7 @@ struct LimitedAssessmentView: View {
                     Button(action: { appState.reset() }) {
                         HStack {
                             Image(systemName: "house")
-                            Text("Home")
+                            Text("home".localized)
                         }
                     }
                 }
@@ -169,6 +176,8 @@ struct LimitedAssessmentView: View {
             }
             .padding()
         }
+        }
+        .edgesIgnoringSafeArea(.top)
     }
 
     private func submitAssessment() {
@@ -198,6 +207,7 @@ struct FormField: View {
         VStack(alignment: .leading, spacing: 12) {
             Label(title, systemImage: icon)
                 .font(.headline)
+                .minimumScaleFactor(0.8)
 
             HStack {
                 TextField(placeholder, text: $text)
@@ -206,6 +216,7 @@ struct FormField: View {
 
                 Text(unit)
                     .foregroundColor(.secondary)
+                    .minimumScaleFactor(0.8)
             }
         }
         .padding()

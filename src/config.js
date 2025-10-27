@@ -119,8 +119,8 @@ export const KIOSK_CONFIG = {
     ? 'http://localhost:8080' // Local Cloud Function emulator
     : 'https://case-sharing-564499947017.europe-west3.run.app',
 
-  // Google Maps API key (add your key here)
-  googleMapsApiKey: 'YOUR_GOOGLE_MAPS_API_KEY_HERE',
+  // Google Maps API key
+  googleMapsApiKey: 'AIzaSyACBndIj8HD1wwZ4Vw8PDDI0bIe6DoBExI',
 
   // GPS tracking settings
   gpsUpdateInterval: 30000, // 30 seconds

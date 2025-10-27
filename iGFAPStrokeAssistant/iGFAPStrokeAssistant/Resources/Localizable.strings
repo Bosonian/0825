@@ -142,6 +142,15 @@
 "loading.authenticating" = "Authenticating...";
 "loading.calculating" = "Calculating risk...";
 
+/* Prerequisites */
+"prerequisitesTitle" = "Prerequisites for Stroke Triage";
+"prerequisitesIntro" = "Please confirm that all of the following prerequisites are met:";
+"prerequisitesWarning" = "All prerequisites must be met to continue";
+"acuteDeficit" = "Acute (severe) neurological deficit present";
+"symptomOnset" = "Symptom onset within 6 hours";
+"noPreexisting" = "No pre-existing severe neurological deficits";
+"noTrauma" = "No traumatic brain injury present";
+
 /* General */
 "ok" = "OK";
 "yes" = "Yes";

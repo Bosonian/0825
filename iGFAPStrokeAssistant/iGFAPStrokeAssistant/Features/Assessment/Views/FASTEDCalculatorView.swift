@@ -7,16 +7,25 @@
 
 import SwiftUI
 
+// MARK: - FAST-ED Result
+
+struct FASTEDResult {
+    let score: Int
+    let hasArmWeakness: Bool
+    let hasEyeDeviation: Bool
+}
+
 struct FASTEDCalculatorView: View {
     @Environment(\.dismiss) var dismiss
     @Binding var score: String
+    var onComplete: ((FASTEDResult) -> Void)? = nil
 
     // FAST-ED Components
     @State private var facialPalsy: FacialPalsyScore = .normal
     @State private var armWeakness: ArmWeaknessScore = .normal
     @State private var speechChanges: SpeechScore = .normal
-    @State private var eyeDeviation: EyeDeviationScore = .absent
-    @State private var denialNeglect: DenialNeglectScore = .absent
+    @State private var eyeDeviation: EyeDeviationScore = .normal
+    @State private var denialNeglect: DenialNeglectScore = .normal
 
     var totalScore: Int {
         facialPalsy.rawValue +
@@ -140,8 +149,9 @@ struct FASTEDCalculatorView: View {
                             icon: "eye"
                         ) {
                             Picker("Eye Deviation", selection: $eyeDeviation) {
-                                Text("Absent (0)").tag(EyeDeviationScore.absent)
-                                Text("Present (1)").tag(EyeDeviationScore.present)
+                                Text("Normal (0)").tag(EyeDeviationScore.normal)
+                                Text("Partial (1)").tag(EyeDeviationScore.partial)
+                                Text("Forced (2)").tag(EyeDeviationScore.forced)
                             }
                             .pickerStyle(.segmented)
 
@@ -157,8 +167,9 @@ struct FASTEDCalculatorView: View {
                             icon: "questionmark.circle"
                         ) {
                             Picker("Denial/Neglect", selection: $denialNeglect) {
-                                Text("Absent (0)").tag(DenialNeglectScore.absent)
-                                Text("Present (1)").tag(DenialNeglectScore.present)
+                                Text("Normal (0)").tag(DenialNeglectScore.normal)
+                                Text("Partial (1)").tag(DenialNeglectScore.partial)
+                                Text("Complete (2)").tag(DenialNeglectScore.complete)
                             }
                             .pickerStyle(.segmented)
 
@@ -222,6 +233,17 @@ struct FASTEDCalculatorView: View {
 
     private func applyScore() {
         score = "\(totalScore)"
+
+        // Create result with symptom states
+        let result = FASTEDResult(
+            score: totalScore,
+            hasArmWeakness: armWeakness != .normal,
+            hasEyeDeviation: eyeDeviation != .normal
+        )
+
+        // Call completion handler if provided
+        onComplete?(result)
+
         dismiss()
     }
 }
@@ -288,13 +310,15 @@ enum SpeechScore: Int, CaseIterable {
 }
 
 enum EyeDeviationScore: Int, CaseIterable {
-    case absent = 0
-    case present = 1
+    case normal = 0
+    case partial = 1
+    case forced = 2
 }
 
 enum DenialNeglectScore: Int, CaseIterable {
-    case absent = 0
-    case present = 1
+    case normal = 0
+    case partial = 1
+    case complete = 2
 }
 
 // MARK: - Preview

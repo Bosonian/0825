@@ -142,6 +142,15 @@
 "loading.authenticating" = "Authentifiziere...";
 "loading.calculating" = "Berechne Risiko...";
 
+/* Voraussetzungen */
+"prerequisitesTitle" = "Voraussetzungen für Schlaganfall-Triage";
+"prerequisitesIntro" = "Bitte bestätigen Sie, dass alle folgenden Voraussetzungen erfüllt sind:";
+"prerequisitesWarning" = "Alle Voraussetzungen müssen erfüllt sein, um fortzufahren";
+"acuteDeficit" = "Akutes (schweres) neurologisches Defizit vorhanden";
+"symptomOnset" = "Symptombeginn innerhalb 6h";
+"noPreexisting" = "Keine vorbestehende schwere neurologische Defizite";
+"noTrauma" = "Kein Schädelhirntrauma vorhanden";
+
 /* Allgemein */
 "ok" = "OK";
 "yes" = "Ja";

@@ -47,7 +47,7 @@ struct RiskRingView: View {
             ZStack {
                 // Background circle
                 Circle()
-                    .stroke(Color.gray.opacity(0.2), lineWidth: 16)
+                    .stroke(Color.gray.opacity(0.2), lineWidth: 10)
                     .frame(width: 140, height: 140)
 
                 // Progress circle
@@ -55,7 +55,7 @@ struct RiskRingView: View {
                     .trim(from: 0, to: animatedPercentage / 100)
                     .stroke(
                         ringColor,
-                        style: StrokeStyle(lineWidth: 16, lineCap: .round)
+                        style: StrokeStyle(lineWidth: 10, lineCap: .round)
                     )
                     .frame(width: 140, height: 140)
                     .rotationEffect(.degrees(-90))

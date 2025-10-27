@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 
-@MainActor
 class LocalizationManager: ObservableObject {
     @Published var currentLanguage: Language = .english
 
@@ -34,22 +33,6 @@ class LocalizationManager: ObservableObject {
             return LocalizedStrings.english[key] ?? key
         case .german:
             return LocalizedStrings.german[key] ?? key
-        }
-    }
-}
-
-// Extension to easily access localized strings
-extension String {
-    var localized: String {
-        LocalizationManager.shared.localized(self)
-    }
-
-    func localized(with language: Language) -> String {
-        switch language {
-        case .english:
-            return LocalizedStrings.english[self] ?? self
-        case .german:
-            return LocalizedStrings.german[self] ?? self
         }
     }
 }

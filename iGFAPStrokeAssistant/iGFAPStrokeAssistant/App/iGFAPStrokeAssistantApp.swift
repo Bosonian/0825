@@ -24,29 +24,35 @@ struct ContentView: View {
     @EnvironmentObject var appState: AppState
 
     var body: some View {
-        Group {
-            switch appState.currentScreen {
-            case .login:
-                LoginView()
+        NavigationStack {
+            Group {
+                switch appState.currentScreen {
+                case .login:
+                    LoginView()
 
-            case .triageComa:
-                TriageComaView()
+                case .triageComa:
+                    TriageComaView()
 
-            case .triageExam:
-                TriageExamView()
+                case .prerequisites:
+                    PrerequisitesView()
 
-            case .comaAssessment:
-                ComaAssessmentView()
+                case .triageExam:
+                    TriageExamView()
 
-            case .limitedAssessment:
-                LimitedAssessmentView()
+                case .comaAssessment:
+                    ComaAssessmentView()
 
-            case .fullAssessment:
-                FullAssessmentView()
+                case .limitedAssessment:
+                    LimitedAssessmentView()
 
-            case .results:
-                ResultsView()
+                case .fullAssessment:
+                    FullAssessmentView()
+
+                case .results:
+                    ResultsView()
+                }
             }
+            .navigationBarHidden(true)
         }
         .alert("Error", isPresented: $appState.showError) {
             Button("OK") {

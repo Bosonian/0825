@@ -17,17 +17,21 @@ struct LoginView: View {
             VStack(spacing: 32) {
                 // Header
                 VStack(spacing: 16) {
-                    Image(systemName: "brain.head.profile")
-                        .font(.system(size: 72))
-                        .foregroundColor(.blue)
+                    Image("app-logo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100, height: 100)
 
-                    Text("iGFAP Stroke Triage")
+                    Text("strokeTriageAssistant".localized)
                         .font(.largeTitle)
                         .fontWeight(.bold)
+                        .minimumScaleFactor(0.7)
+                        .lineLimit(2)
 
-                    Text("Research Access")
+                    Text("researchAccess".localized)
                         .font(.title3)
                         .foregroundColor(.secondary)
+                        .minimumScaleFactor(0.8)
                 }
                 .padding(.top, 60)
 
@@ -36,11 +40,13 @@ struct LoginView: View {
                     HStack {
                         Image(systemName: "exclamationmark.triangle.fill")
                             .foregroundColor(.orange)
-                        Text("Research Tool Only")
+                        Text("researchToolOnly".localized)
                             .fontWeight(.semibold)
+                            .minimumScaleFactor(0.8)
+                            .lineLimit(2)
                     }
 
-                    Text("This application is for research purposes only and is not approved for clinical use. Always consult qualified medical professionals for patient care decisions.")
+                    Text("researchToolDisclaimer".localized)
                         .font(.caption)
                         .foregroundColor(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
@@ -57,10 +63,11 @@ struct LoginView: View {
 
                 // Access Code Input
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Research Access Code")
+                    Text("researchAccessCode".localized)
                         .font(.headline)
+                        .minimumScaleFactor(0.8)
 
-                    SecureField("Enter access code", text: $accessCode)
+                    SecureField("enterAccessCode".localized, text: $accessCode)
                         .textFieldStyle(.roundedBorder)
                         .focused($isCodeFieldFocused)
                         .textContentType(.password)
@@ -70,16 +77,18 @@ struct LoginView: View {
                             login()
                         }
 
-                    Text("Contact your research coordinator for access")
+                    Text("contactResearchCoordinator".localized)
                         .font(.caption)
                         .foregroundColor(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
 
                 // Login Button
                 Button(action: login) {
                     HStack {
                         Image(systemName: "lock.shield.fill")
-                        Text("Secure Login")
+                        Text("secureLogin".localized)
+                            .minimumScaleFactor(0.8)
                     }
                     .font(.headline)
                     .foregroundColor(.white)
@@ -96,15 +105,18 @@ struct LoginView: View {
 
                 // Footer
                 VStack(spacing: 8) {
-                    Text("CE certification pending")
+                    Text("ceCertificationPending".localized)
                         .font(.caption)
                         .foregroundColor(.secondary)
+                        .minimumScaleFactor(0.8)
 
-                    Text("Clinical oversight: RKH Klinikum Ludwigsburg")
+                    Text("clinicalOversight".localized)
                         .font(.caption2)
                         .foregroundColor(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .multilineTextAlignment(.center)
 
-                    Text("Contact: bosdeepak@gmail.com")
+                    Text("contactEmail".localized)
                         .font(.caption2)
                         .foregroundColor(.blue)
                 }

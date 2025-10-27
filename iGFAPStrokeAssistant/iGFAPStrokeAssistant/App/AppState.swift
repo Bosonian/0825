@@ -39,7 +39,8 @@ class AppState: ObservableObject {
     // MARK: - Preferences
 
     @Published var currentLanguage: Language = .english
-    @Published var colorScheme: ColorScheme?
+    @Published var colorScheme: ColorScheme? = nil
+    @Published var isDarkMode: Bool = false
 
     // MARK: - Dependencies
 
@@ -75,6 +76,21 @@ class AppState: ObservableObject {
         selectedModule = nil
         errorMessage = nil
         showError = false
+    }
+
+    // MARK: - Preferences
+
+    func toggleDarkMode() {
+        isDarkMode.toggle()
+        colorScheme = isDarkMode ? .dark : .light
+        UserDefaults.standard.set(isDarkMode, forKey: "isDarkMode")
+    }
+
+    func toggleLanguage() {
+        currentLanguage = currentLanguage == .english ? .german : .english
+        UserDefaults.standard.set(currentLanguage.rawValue, forKey: "currentLanguage")
+        // Update LocalizationManager
+        LocalizationManager.shared.setLanguage(currentLanguage)
     }
 
     // MARK: - Authentication
@@ -279,6 +295,15 @@ class AppState: ObservableObject {
                 currentScreen = .triageComa
             }
         }
+
+        // Load preferences
+        isDarkMode = UserDefaults.standard.bool(forKey: "isDarkMode")
+        colorScheme = isDarkMode ? .dark : .light
+
+        if let languageCode = UserDefaults.standard.string(forKey: "currentLanguage"),
+           let language = Language(rawValue: languageCode) {
+            currentLanguage = language
+        }
     }
 
     private func clearSessionStorage() {
@@ -293,6 +318,7 @@ class AppState: ObservableObject {
 enum Screen: Hashable {
     case login
     case triageComa
+    case prerequisites
     case triageExam
     case comaAssessment
     case limitedAssessment

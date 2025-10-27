@@ -170,7 +170,7 @@ extension View {
 struct RiskLevelBadge: ViewModifier {
     let level: RiskLevel
 
-    func body(content: Content) -> View {
+    func body(content: Content) -> some View {
         content
             .padding(.horizontal, 12)
             .padding(.vertical, 6)
@@ -193,7 +193,7 @@ extension View {
 // MARK: - Form Section Styling
 
 struct FormSectionStyle: ViewModifier {
-    func body(content: Content) -> View {
+    func body(content: Content) -> some View {
         content
             .listRowBackground(Color.backgroundSecondary)
             .listRowSeparator(.hidden)

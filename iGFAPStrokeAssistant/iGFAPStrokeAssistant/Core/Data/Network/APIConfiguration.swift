@@ -53,10 +53,8 @@ struct APIConfiguration {
     // MARK: - Current Configuration
 
     static var current: APIConfiguration {
-        #if DEBUG
-        return development
-        #else
+        // Use production API for both DEBUG and RELEASE
+        // Development requires local proxy at localhost:8080
         return production
-        #endif
     }
 }

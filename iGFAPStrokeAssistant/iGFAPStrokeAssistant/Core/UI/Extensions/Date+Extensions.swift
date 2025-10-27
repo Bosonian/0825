@@ -171,7 +171,7 @@ extension Date {
     // MARK: - Medical Use Cases
 
     /// Check if session is expired (based on timestamp)
-    func isSessionExpired(duration: TimeInterval = AppConstants.sessionDurationMinutes * 60) -> Bool {
+    func isSessionExpired(duration: TimeInterval = TimeInterval(AppConstants.sessionDurationMinutes * 60)) -> Bool {
         Date().timeIntervalSince(self) > duration
     }
 

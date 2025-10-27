@@ -150,25 +150,40 @@ enum AppConstants {
 
     static let mockStrokeCenters = [
         StrokeCenter(
+            id: UUID(),
             name: "University Hospital",
             type: .comprehensive,
+            address: "Marchioninistraße 15",
+            city: "Munich",
+            country: "Germany",
             latitude: 48.1372,
             longitude: 11.5755,
-            phoneNumber: "+49 89 4400-0"
+            phoneNumber: "+49 89 4400-0",
+            capabilities: ["24/7 Stroke Unit", "Thrombectomy", "Neurosurgery"]
         ),
         StrokeCenter(
+            id: UUID(),
             name: "City Medical Center",
             type: .primary,
+            address: "Steinheilstraße 1",
+            city: "Munich",
+            country: "Germany",
             latitude: 48.1500,
             longitude: 11.5800,
-            phoneNumber: "+49 89 5555-0"
+            phoneNumber: "+49 89 5555-0",
+            capabilities: ["Stroke Unit", "CT/MRI"]
         ),
         StrokeCenter(
+            id: UUID(),
             name: "Regional Hospital",
             type: .comprehensive,
+            address: "Karlsplatz 25",
+            city: "Munich",
+            country: "Germany",
             latitude: 48.1200,
             longitude: 11.5600,
-            phoneNumber: "+49 89 6666-0"
+            phoneNumber: "+49 89 6666-0",
+            capabilities: ["24/7 Stroke Unit", "Thrombectomy"]
         )
     ]
 

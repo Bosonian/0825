@@ -12,18 +12,23 @@ struct TriageComaView: View {
     @State private var showGCSInfo = false
 
     var body: some View {
-        VStack(spacing: 32) {
-            // Header
+        VStack(spacing: 0) {
+            AppNavigationBar(showBackButton: false, showHomeButton: true)
+
+            VStack(spacing: 32) {
+                // Header
             VStack(spacing: 12) {
                 Image(systemName: "questionmark.circle.fill")
                     .font(.system(size: 60))
                     .foregroundColor(.blue)
 
-                Text("Patient Triage")
+                Text("patientAssessment".localized)
                     .font(.largeTitle)
                     .fontWeight(.bold)
+                    .minimumScaleFactor(0.7)
+                    .lineLimit(2)
 
-                Text("Step 1 of 2")
+                Text(String(format: "stepOf".localized, 1, 2))
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
@@ -33,20 +38,28 @@ struct TriageComaView: View {
 
             // Question
             VStack(spacing: 24) {
-                Text("Is the patient comatose?")
+                Text("isPatientComatose".localized)
                     .font(.title2)
                     .fontWeight(.semibold)
                     .multilineTextAlignment(.center)
+                    .minimumScaleFactor(0.8)
+                    .lineLimit(3)
+                    .fixedSize(horizontal: false, vertical: true)
 
-                Text("Glasgow Coma Scale < 8")
+                Text("glasgowComaScale".localized)
                     .font(.headline)
                     .foregroundColor(.secondary)
+                    .minimumScaleFactor(0.8)
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
 
                 // Info Button
                 Button(action: { showGCSInfo = true }) {
                     HStack {
                         Image(systemName: "info.circle")
-                        Text("What is GCS?")
+                        Text("whatIsGCS".localized)
+                            .minimumScaleFactor(0.8)
+                            .lineLimit(1)
                     }
                     .font(.subheadline)
                     .foregroundColor(.blue)
@@ -62,34 +75,15 @@ struct TriageComaView: View {
                     HStack {
                         Image(systemName: "checkmark.circle.fill")
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("Yes (GCS < 8)")
+                            Text("yesComatose".localized)
                                 .font(.headline)
-                            Text("Patient is comatose")
+                                .minimumScaleFactor(0.8)
+                                .lineLimit(2)
+                            Text("patientIsComatose".localized)
                                 .font(.caption)
                                 .foregroundColor(.white.opacity(0.8))
-                        }
-                        Spacer()
-                        Image(systemName: "chevron.right")
-                    }
-                    .foregroundColor(.white)
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .background(
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color.red)
-                    )
-                }
-
-                // No - Continue to Triage 2
-                Button(action: continueToTriageExam) {
-                    HStack {
-                        Image(systemName: "xmark.circle.fill")
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("No (GCS ≥ 8)")
-                                .font(.headline)
-                            Text("Patient is not comatose")
-                                .font(.caption)
-                                .foregroundColor(.white.opacity(0.8))
+                                .minimumScaleFactor(0.8)
+                                .lineLimit(2)
                         }
                         Spacer()
                         Image(systemName: "chevron.right")
@@ -102,6 +96,33 @@ struct TriageComaView: View {
                             .fill(Color.green)
                     )
                 }
+
+                // No - Continue to Triage 2
+                Button(action: continueToTriageExam) {
+                    HStack {
+                        Image(systemName: "xmark.circle.fill")
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("noComatose".localized)
+                                .font(.headline)
+                                .minimumScaleFactor(0.8)
+                                .lineLimit(2)
+                            Text("patientIsNotComatose".localized)
+                                .font(.caption)
+                                .foregroundColor(.white.opacity(0.8))
+                                .minimumScaleFactor(0.8)
+                                .lineLimit(2)
+                        }
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                    }
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(Color.red)
+                    )
+                }
             }
 
             Spacer()
@@ -110,14 +131,16 @@ struct TriageComaView: View {
             Button(action: { appState.logout() }) {
                 HStack {
                     Image(systemName: "rectangle.portrait.and.arrow.right")
-                    Text("Logout")
+                    Text("logout".localized)
                 }
                 .font(.subheadline)
                 .foregroundColor(.red)
             }
             .padding(.bottom)
+            }
+            .padding()
         }
-        .padding()
+        .edgesIgnoringSafeArea(.top)
         .sheet(isPresented: $showGCSInfo) {
             GCSInfoView()
         }
@@ -128,7 +151,7 @@ struct TriageComaView: View {
     }
 
     private func continueToTriageExam() {
-        appState.navigate(to: .triageExam)
+        appState.navigate(to: .prerequisites)
     }
 }
 

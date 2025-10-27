@@ -22,21 +22,26 @@ struct ComaAssessmentView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 32) {
+        VStack(spacing: 0) {
+            AppNavigationBar(showBackButton: true, showHomeButton: false)
+
+            ScrollView {
+                VStack(spacing: 32) {
                 // Header
                 VStack(spacing: 12) {
                     Image(systemName: "exclamationmark.triangle.fill")
                         .font(.system(size: 60))
                         .foregroundColor(.red)
 
-                    Text("Coma Module")
+                    Text("comaModule".localized)
                         .font(.largeTitle)
                         .fontWeight(.bold)
+                        .minimumScaleFactor(0.7)
 
-                    Text("GCS < 8 - Rapid Assessment")
+                    Text("gcsRapidAssessment".localized)
                         .font(.headline)
                         .foregroundColor(.secondary)
+                        .minimumScaleFactor(0.8)
                 }
                 .padding(.top, 20)
 
@@ -45,11 +50,12 @@ struct ComaAssessmentView: View {
                     HStack {
                         Image(systemName: "info.circle.fill")
                             .foregroundColor(.blue)
-                        Text("Critical Patient")
+                        Text("criticalPatient".localized)
                             .fontWeight(.semibold)
+                            .minimumScaleFactor(0.8)
                     }
 
-                    Text("This module provides rapid ICH risk assessment for comatose patients using only GFAP biomarker data.")
+                    Text("comaModuleDescription".localized)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
@@ -62,39 +68,40 @@ struct ComaAssessmentView: View {
 
                 // GFAP Input
                 VStack(alignment: .leading, spacing: 12) {
-                    Label("GFAP Value", systemImage: "drop.fill")
+                    Label("gfapValue".localized, systemImage: "drop.fill")
                         .font(.headline)
                         .foregroundColor(.primary)
+                        .minimumScaleFactor(0.8)
 
                     HStack {
-                        TextField("Enter value", text: $gfapText)
+                        TextField("enterValue".localized, text: $gfapText)
                             .keyboardType(.decimalPad)
                             .textFieldStyle(.roundedBorder)
                             .focused($isGfapFieldFocused)
 
-                        Text("pg/mL")
+                        Text("pgml".localized)
                             .foregroundColor(.secondary)
                     }
 
-                    Text("Valid range: 29 - 10,001 pg/mL")
+                    Text("validRange".localized)
                         .font(.caption)
                         .foregroundColor(.secondary)
 
                     if let value = gfapValue {
                         if value < 29 {
-                            Text("⚠️ Value below minimum (29 pg/mL)")
+                            Text("valueBelowMinimum".localized)
                                 .font(.caption)
                                 .foregroundColor(.red)
                         } else if value > 10001 {
-                            Text("⚠️ Value exceeds maximum (10,001 pg/mL)")
+                            Text("valueExceedsMaximum".localized)
                                 .font(.caption)
                                 .foregroundColor(.red)
                         } else if value > 8000 {
-                            Text("⚠️ Extremely high value - please verify")
+                            Text("extremelyHighValue".localized)
                                 .font(.caption)
                                 .foregroundColor(.orange)
                         } else {
-                            Text("✓ Valid value")
+                            Text("validValue".localized)
                                 .font(.caption)
                                 .foregroundColor(.green)
                         }
@@ -108,7 +115,8 @@ struct ComaAssessmentView: View {
                 Button(action: submitAssessment) {
                     HStack {
                         Image(systemName: "bolt.fill")
-                        Text("Calculate ICH Risk")
+                        Text("calculateICHRisk".localized)
+                            .minimumScaleFactor(0.8)
                     }
                     .font(.headline)
                     .foregroundColor(.white)
@@ -128,7 +136,7 @@ struct ComaAssessmentView: View {
                     Button(action: { appState.goBack() }) {
                         HStack {
                             Image(systemName: "chevron.left")
-                            Text("Back")
+                            Text("back".localized)
                         }
                         .foregroundColor(.blue)
                     }
@@ -138,7 +146,7 @@ struct ComaAssessmentView: View {
                     Button(action: { appState.reset() }) {
                         HStack {
                             Image(systemName: "house")
-                            Text("Home")
+                            Text("home".localized)
                         }
                         .foregroundColor(.blue)
                     }
@@ -146,7 +154,9 @@ struct ComaAssessmentView: View {
                 .font(.subheadline)
             }
             .padding()
+            }
         }
+        .edgesIgnoringSafeArea(.top)
         .onAppear {
             isGfapFieldFocused = true
         }

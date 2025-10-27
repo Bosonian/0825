@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension String {
     // MARK: - Validation
@@ -49,14 +50,19 @@ extension String {
 
     // MARK: - Localization
 
-    /// Localize string using NSLocalizedString
+    /// Localize string using LocalizationManager
     var localized: String {
-        NSLocalizedString(self, comment: "")
+        LocalizationManager.shared.localized(self)
     }
 
-    /// Localize with arguments
-    func localized(with arguments: CVarArg...) -> String {
-        String(format: NSLocalizedString(self, comment: ""), arguments: arguments)
+    /// Localize with language parameter
+    func localized(with language: Language) -> String {
+        switch language {
+        case .english:
+            return LocalizedStrings.english[self] ?? self
+        case .german:
+            return LocalizedStrings.german[self] ?? self
+        }
     }
 
     // MARK: - Subscript

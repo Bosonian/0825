@@ -22,13 +22,13 @@ export const KIOSK_CONFIG = {
 
   // Hospital ID (configure per kiosk installation)
   // Leave as null to show all cases, or set to specific hospital ID
-  hospitalId: null, // e.g., 'BY-NS-001' for LMU Klinikum München
+  hospitalId: 'BY-NS-001', // LMU Klinikum München - Großhadern
 
   // Hospital name for display
-  hospitalName: 'Notaufnahme', // Update per installation
+  hospitalName: 'LMU Klinikum München - Notaufnahme',
 
   // Google Maps API Key (for live tracking map)
-  googleMapsApiKey: 'YOUR_GOOGLE_MAPS_API_KEY_HERE',
+  googleMapsApiKey: 'AIzaSyACBndIj8HD1wwZ4Vw8PDDI0bIe6DoBExI',
 
   // Alert settings
   playAudioAlert: true,

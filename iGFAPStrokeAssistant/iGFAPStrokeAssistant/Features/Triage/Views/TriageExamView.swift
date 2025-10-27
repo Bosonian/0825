@@ -11,18 +11,23 @@ struct TriageExamView: View {
     @EnvironmentObject var appState: AppState
 
     var body: some View {
-        VStack(spacing: 32) {
-            // Header
+        VStack(spacing: 0) {
+            AppNavigationBar(showBackButton: true, showHomeButton: true)
+
+            VStack(spacing: 32) {
+                // Header
             VStack(spacing: 12) {
                 Image(systemName: "stethoscope")
                     .font(.system(size: 60))
                     .foregroundColor(.blue)
 
-                Text("Patient Examination")
+                Text("examinationCapability".localized)
                     .font(.largeTitle)
                     .fontWeight(.bold)
+                    .minimumScaleFactor(0.7)
+                    .lineLimit(2)
 
-                Text("Step 2 of 2")
+                Text(String(format: "stepOf".localized, 2, 2))
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
@@ -32,16 +37,21 @@ struct TriageExamView: View {
 
             // Question
             VStack(spacing: 16) {
-                Text("Can the patient be reliably examined?")
+                Text("canBeReliablyExamined".localized)
                     .font(.title2)
                     .fontWeight(.semibold)
                     .multilineTextAlignment(.center)
+                    .minimumScaleFactor(0.8)
+                    .lineLimit(3)
+                    .fixedSize(horizontal: false, vertical: true)
 
-                Text("Patient is cooperative, not significantly aphasic or confused")
+                Text("patientNotAphasic".localized)
                     .font(.subheadline)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
+                    .minimumScaleFactor(0.8)
+                    .fixedSize(horizontal: false, vertical: true)
             }
 
             Spacer()
@@ -52,13 +62,10 @@ struct TriageExamView: View {
                 Button(action: selectFullModule) {
                     HStack {
                         Image(systemName: "checkmark.circle.fill")
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Yes, can examine")
-                                .font(.headline)
-                            Text("Full comprehensive assessment")
-                                .font(.caption)
-                                .foregroundColor(.white.opacity(0.8))
-                        }
+                        Text("yesFullExam".localized)
+                            .font(.headline)
+                            .minimumScaleFactor(0.8)
+                            .lineLimit(2)
                         Spacer()
                         Image(systemName: "chevron.right")
                     }
@@ -75,13 +82,10 @@ struct TriageExamView: View {
                 Button(action: selectLimitedModule) {
                     HStack {
                         Image(systemName: "xmark.circle.fill")
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("No, cannot examine")
-                                .font(.headline)
-                            Text("Limited data assessment")
-                                .font(.caption)
-                                .foregroundColor(.white.opacity(0.8))
-                        }
+                        Text("noLimitedExam".localized)
+                            .font(.headline)
+                            .minimumScaleFactor(0.8)
+                            .lineLimit(2)
                         Spacer()
                         Image(systemName: "chevron.right")
                     }
@@ -90,7 +94,7 @@ struct TriageExamView: View {
                     .frame(maxWidth: .infinity)
                     .background(
                         RoundedRectangle(cornerRadius: 12)
-                            .fill(Color.orange)
+                            .fill(Color.red)
                     )
                 }
             }
@@ -101,14 +105,16 @@ struct TriageExamView: View {
             Button(action: { appState.goBack() }) {
                 HStack {
                     Image(systemName: "chevron.left")
-                    Text("Back")
+                    Text("goBack".localized)
                 }
                 .font(.subheadline)
                 .foregroundColor(.blue)
             }
             .padding(.bottom)
+            }
+            .padding()
         }
-        .padding()
+        .edgesIgnoringSafeArea(.top)
     }
 
     private func selectFullModule() {
