@@ -109,6 +109,10 @@ function renderRiskCard(type, data, results) {
   const titles = { ich: t('ichProbability'), lvo: t('lvoProbability') };
 
   const level = isCritical ? 'critical' : isHigh ? 'high' : 'normal';
+  const color = level === 'critical' ? '#ff4444' : level === 'high' ? '#ff8800' : '#0066cc';
+  const circumference = Math.PI * 100;
+  const offset = circumference * (1 - percent / 100);
+
   return `
     <div class="enhanced-risk-card ${type} ${level}">
       <div class="risk-header">
@@ -117,23 +121,28 @@ function renderRiskCard(type, data, results) {
           <h3>${titles[type]}</h3>
         </div>
       </div>
-      
+
       <div class="risk-probability">
         <div class="circles-container">
           <div class="rings-row">
             <div class="circle-item">
-              <div class="probability-circle" data-react-ring data-percent="${percent}" data-level="${level}">
-                <svg viewBox="0 0 120 120" class="probability-svg">
+              <div class="probability-circle">
+                <svg viewBox="0 0 120 120" width="120" height="120" style="display: block; overflow: visible;">
                   <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="8"/>
                   <circle cx="60" cy="60" r="50" fill="none"
-                    stroke="${level === 'critical' ? '#ff4444' : level === 'high' ? '#ff8800' : '#0066cc'}"
+                    stroke="${color}"
                     stroke-width="8"
-                    stroke-dasharray="${Math.PI * 100}"
-                    stroke-dashoffset="${Math.PI * 100 * (1 - percent / 100)}"
+                    stroke-dasharray="${circumference}"
+                    stroke-dashoffset="${offset}"
                     stroke-linecap="round"
                     transform="rotate(-90 60 60)"/>
-                  <text x="60" y="60" text-anchor="middle" dominant-baseline="middle"
-                    class="probability-text" fill="currentColor" font-size="20" font-weight="bold">
+                  <text x="60" y="65"
+                    text-anchor="middle"
+                    font-family="system-ui, -apple-system, sans-serif"
+                    font-size="24"
+                    font-weight="bold"
+                    fill="#ffffff"
+                    style="pointer-events: none;">
                     ${percent}%
                   </text>
                 </svg>
@@ -262,16 +271,9 @@ export function renderResults(results, startTime) {
     }
 
     // Initialize animations after DOM update
-    setTimeout(async () => {
+    setTimeout(() => {
       console.log('[Results] Initializing volume animations...');
       initializeVolumeAnimations();
-      // React islands are optional - if they fail to load, vanilla SVG will still show the percentage
-      try {
-        const { mountIslands } = await import('../../react/mountIslands');
-        mountIslands();
-      } catch (err) {
-        console.log('React islands not available, vanilla SVG text will display percentage');
-      }
     }, 100);
 
     return resultsHtml;

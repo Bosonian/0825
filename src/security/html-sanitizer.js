@@ -18,7 +18,7 @@ const ALLOWED_TAGS = [
   'table', 'tr', 'td', 'th', 'thead', 'tbody',
   'small', 'sub', 'sup',
   'button', 'input', 'form', 'label', 'select', 'option', 'textarea',
-  'a', 'img', 'canvas', 'svg', 'path', 'circle', 'rect', 'line', 'g',
+  'a', 'img', 'canvas', 'svg', 'path', 'circle', 'rect', 'line', 'g', 'text',
 ];
 
 /**
@@ -56,12 +56,13 @@ const ALLOWED_ATTRIBUTES = {
   a: ['href', 'target', 'class', 'id'],
   img: ['src', 'alt', 'class', 'id', 'width', 'height'],
   canvas: ['class', 'id', 'width', 'height'],
-  svg: ['class', 'id', 'width', 'height', 'viewBox', 'xmlns'],
+  svg: ['class', 'id', 'width', 'height', 'viewBox', 'xmlns', 'style'],
   path: ['d', 'fill', 'stroke', 'stroke-width', 'class'],
-  circle: ['cx', 'cy', 'r', 'fill', 'stroke', 'stroke-width', 'class'],
+  circle: ['cx', 'cy', 'r', 'fill', 'stroke', 'stroke-width', 'class', 'stroke-dasharray', 'stroke-dashoffset', 'stroke-linecap', 'transform'],
   rect: ['x', 'y', 'width', 'height', 'fill', 'stroke', 'stroke-width', 'class'],
   line: ['x1', 'y1', 'x2', 'y2', 'stroke', 'stroke-width', 'class'],
   g: ['class', 'transform'],
+  text: ['x', 'y', 'text-anchor', 'font-family', 'font-size', 'font-weight', 'fill', 'class', 'style', 'dominant-baseline'],
 };
 
 /**
@@ -70,7 +71,7 @@ const ALLOWED_ATTRIBUTES = {
 const ALLOWED_STYLES = [
   'color', 'background-color', 'font-size', 'font-weight',
   'text-align', 'margin', 'padding', 'border',
-  'display', 'visibility', 'opacity',
+  'display', 'visibility', 'opacity', 'pointer-events', 'overflow',
 ];
 
 /**
