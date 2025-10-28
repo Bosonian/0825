@@ -267,7 +267,7 @@ export function renderResults(results, startTime) {
       initializeVolumeAnimations();
       // React islands are optional - if they fail to load, vanilla SVG will still show the percentage
       try {
-        const { mountIslands } = await import('../../react/mountIslands.jsx');
+        const { mountIslands } = await import('../../react/mountIslands');
         mountIslands();
       } catch (err) {
         console.log('React islands not available, vanilla SVG text will display percentage');
