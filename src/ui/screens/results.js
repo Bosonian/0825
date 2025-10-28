@@ -122,7 +122,7 @@ function renderRiskCard(type, data, results) {
         <div class="circles-container">
           <div class="rings-row">
             <div class="circle-item">
-              <div class="probability-circle" data-react-ring data-percent="${percent}" data-level="${level}">
+              <div class="probability-circle">
                 <svg viewBox="0 0 120 120" class="probability-svg">
                   <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="8"/>
                   <circle cx="60" cy="60" r="50" fill="none"
@@ -265,11 +265,12 @@ export function renderResults(results, startTime) {
     setTimeout(async () => {
       console.log('[Results] Initializing volume animations...');
       initializeVolumeAnimations();
+      // React islands are optional - if they fail to load, vanilla SVG will still show the percentage
       try {
         const { mountIslands } = await import('../../react/mountIslands.jsx');
         mountIslands();
       } catch (err) {
-        console.log('React islands not available, using vanilla SVG:', err);
+        console.log('React islands not available, vanilla SVG text will display percentage');
       }
     }, 100);
 
