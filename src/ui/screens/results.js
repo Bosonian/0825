@@ -122,7 +122,22 @@ function renderRiskCard(type, data, results) {
         <div class="circles-container">
           <div class="rings-row">
             <div class="circle-item">
-              <div class="probability-circle" data-react-ring data-percent="${percent}" data-level="${level}"></div>
+              <div class="probability-circle" data-react-ring data-percent="${percent}" data-level="${level}">
+                <svg viewBox="0 0 120 120" class="probability-svg">
+                  <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="8"/>
+                  <circle cx="60" cy="60" r="50" fill="none"
+                    stroke="${level === 'critical' ? '#ff4444' : level === 'high' ? '#ff8800' : '#0066cc'}"
+                    stroke-width="8"
+                    stroke-dasharray="${Math.PI * 100}"
+                    stroke-dashoffset="${Math.PI * 100 * (1 - percent / 100)}"
+                    stroke-linecap="round"
+                    transform="rotate(-90 60 60)"/>
+                  <text x="60" y="60" text-anchor="middle" dominant-baseline="middle"
+                    class="probability-text" fill="currentColor" font-size="20" font-weight="bold">
+                    ${percent}%
+                  </text>
+                </svg>
+              </div>
               <div class="circle-label">${type === 'ich' ? 'ICH Risk' : 'LVO Risk'}</div>
             </div>
           </div>
