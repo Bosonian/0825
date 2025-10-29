@@ -10,7 +10,20 @@ import json
 import os
 
 app = Flask(__name__)
-CORS(app)
+# Configure CORS to allow both production and local development
+CORS(app, resources={
+    r"/*": {
+        "origins": [
+            "https://bosonian.github.io",
+            "http://localhost:3002",
+            "http://localhost:3001",
+            "http://localhost:4173"
+        ],
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Accept"],
+        "supports_credentials": True
+    }
+})
 
 # Initialize Cloud Storage
 storage_client = storage.Client()
@@ -45,7 +58,24 @@ def store_case():
         timestamp = datetime.now().timestamp()
         case_id = f"case_{int(timestamp)}_{os.urandom(4).hex()}"
 
-        # Create case object
+        # CRITICAL: Sanitize form data to remove defaults/placeholders
+        raw_form_data = data.get('formData', {})
+        sanitized_form_data = sanitize_form_data(raw_form_data)
+
+        # Log sanitization for auditing
+        if raw_form_data != sanitized_form_data:
+            raw_keys = set()
+            san_keys = set()
+            for m in raw_form_data.values():
+                if isinstance(m, dict):
+                    raw_keys.update(m.keys())
+            for m in sanitized_form_data.values():
+                if isinstance(m, dict):
+                    san_keys.update(m.keys())
+            removed_keys = raw_keys - san_keys
+            print(f"⚠️  Sanitized form data - removed default fields: {removed_keys}")
+
+        # Create case object with sanitized data
         case_data = {
             'id': case_id,
             'createdAt': datetime.now().isoformat(),
@@ -58,7 +88,7 @@ def store_case():
 
             # Assessment results
             'results': data['results'],
-            'formData': data.get('formData', {}),
+            'formData': sanitized_form_data,  # SANITIZED - only actual user inputs
             'moduleType': data.get('moduleType', 'unknown'),
 
             # Location tracking
@@ -76,7 +106,14 @@ def store_case():
 
             # Metadata
             'version': 1,
-            'lastUpdated': datetime.now().isoformat()
+            'lastUpdated': datetime.now().isoformat(),
+
+            # Data integrity: hash of case data
+            'dataIntegrityHash': hash(json.dumps({
+                'id': case_id,
+                'results': data['results'],
+                'formData': sanitized_form_data
+            }, sort_keys=True))
         }
 
         # Store in Cloud Storage
@@ -283,6 +320,58 @@ def mark_arrived():
         return jsonify({'error': str(e)}), 500
 
 
+@app.route('/archive-case', methods=['POST', 'OPTIONS'])
+def archive_case():
+    """
+    Archive/dismiss a case (from kiosk)
+    Expects: caseId, reason (optional)
+    """
+    # Handle preflight
+    if request.method == 'OPTIONS':
+        return '', 204
+
+    try:
+        data = request.get_json()
+        case_id = data.get('caseId')
+
+        if not case_id:
+            return jsonify({'error': 'Missing caseId'}), 400
+
+        bucket = get_bucket()
+        if not bucket:
+            return jsonify({'error': 'Storage unavailable'}), 503
+
+        blob = bucket.blob(f"cases/{case_id}.json")
+
+        if not blob.exists():
+            return jsonify({'error': 'Case not found'}), 404
+
+        case_data = json.loads(blob.download_as_text())
+
+        # Update status to archived
+        case_data['status'] = 'archived'
+        case_data['archivedAt'] = datetime.now().isoformat()
+        case_data['archiveReason'] = data.get('reason', 'dismissed_by_kiosk')
+        case_data['lastUpdated'] = datetime.now().isoformat()
+
+        # Save updated case
+        blob.upload_from_string(
+            json.dumps(case_data, indent=2),
+            content_type='application/json'
+        )
+
+        print(f"✓ Case archived: {case_id} (reason: {case_data['archiveReason']})")
+
+        return jsonify({
+            'success': True,
+            'message': 'Case archived successfully'
+        }), 200
+
+    except Exception as e:
+        print(f"Error archiving case: {e}")
+        return jsonify({'error': str(e)}), 500
+
+
 @app.route('/cleanup-old-cases', methods=['POST'])
 def cleanup_old_cases():
     """
@@ -333,6 +422,62 @@ def health():
         'service': 'case-sharing',
         'timestamp': datetime.now().isoformat()
     }), 200
+
+
+def sanitize_form_data(form_data):
+    """
+    CRITICAL: Remove default/placeholder values from form data
+    Only keep values that were actually input by users
+    This prevents displaying incorrect patient data
+    """
+    if not form_data or not isinstance(form_data, dict):
+        return {}
+
+    sanitized = {}
+
+    # Default values that indicate no user input
+    DEFAULT_VALUES = {
+        None, '', 0, '0', False,
+        'no', 'nein', 'none', 'keine', 'unknown', 'unbekannt',
+        '× nein', '× no', 'x nein', 'x no',
+        '× nein / no', 'x nein / no'
+    }
+
+    for module_key, module_data in form_data.items():
+        if not isinstance(module_data, dict):
+            continue
+
+        sanitized_module = {}
+
+        for field_key, field_value in module_data.items():
+            # Skip if value is in default set
+            if field_value in DEFAULT_VALUES:
+                continue
+
+            # Skip if value is string and matches default patterns
+            if isinstance(field_value, str):
+                value_lower = field_value.lower().strip()
+                if value_lower in DEFAULT_VALUES:
+                    continue
+                # Skip patterns like "× Nein / No" or "Nein / No"
+                if value_lower.startswith('×') or value_lower.startswith('x'):
+                    if 'nein' in value_lower or 'no' in value_lower:
+                        continue
+                if value_lower.endswith('/no') or value_lower.endswith('/nein'):
+                    continue
+
+            # Skip empty arrays
+            if isinstance(field_value, list) and len(field_value) == 0:
+                continue
+
+            # Value passed validation - include it
+            sanitized_module[field_key] = field_value
+
+        # Only include module if it has valid data
+        if sanitized_module:
+            sanitized[module_key] = sanitized_module
+
+    return sanitized
 
 
 def compute_urgency(results):
