@@ -102,12 +102,28 @@ def authenticate_research_access(request):
     }
     """
 
-    # CORS headers for frontend
+    # CORS headers for frontend (production and development)
+    origin = request.headers.get('Origin', '')
+    allowed_origins = [
+        'https://igfap.eu',
+        'https://bosonian.github.io',
+        'http://localhost:5173',
+        'http://localhost:4173',
+        'http://localhost:3000'
+    ]
+
+    # Check if origin is allowed
+    if origin in allowed_origins:
+        allowed_origin = origin
+    else:
+        allowed_origin = 'https://igfap.eu'  # Default to production
+
     headers = {
-        'Access-Control-Allow-Origin': 'https://igfap.eu',
+        'Access-Control-Allow-Origin': allowed_origin,
         'Access-Control-Allow-Methods': 'POST, OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        'Access-Control-Max-Age': '3600'
+        'Access-Control-Max-Age': '3600',
+        'Access-Control-Allow-Credentials': 'true'
     }
 
     # Handle preflight requests
@@ -147,6 +163,51 @@ def authenticate_research_access(request):
 
         # Calculate remaining attempts
         remaining_attempts = MAX_ATTEMPTS_PER_IP - rate_limit_store.get(client_ip, {}).get('attempts', 0)
+
+        # SIMPLE API: If only password is provided (no action field)
+        # This is the simplified endpoint requested by the developer
+        if 'password' in request_data and not action:
+            password = request_data.get('password', '')
+
+            if not password:
+                return (json.dumps({
+                    'success': False,
+                    'message': 'Password required'
+                }), 400, headers)
+
+            # Hash the provided password
+            password_hash = hash_password(password)
+            expected_hash = get_secure_password_hash()
+
+            # Secure comparison to prevent timing attacks
+            if hmac.compare_digest(password_hash, expected_hash):
+                # Generate session token
+                session_token = generate_session_token(client_ip)
+                expires_at = datetime.utcnow() + timedelta(seconds=SESSION_DURATION)
+
+                # Log successful authentication (no sensitive data)
+                logger.info(f"Successful authentication from IP: {client_ip}")
+
+                # Clear rate limiting on successful auth
+                if client_ip in rate_limit_store:
+                    del rate_limit_store[client_ip]
+
+                return (json.dumps({
+                    'success': True,
+                    'session_token': session_token,
+                    'expires_at': expires_at.isoformat() + 'Z',
+                    'message': 'Authentication successful',
+                    'session_duration': SESSION_DURATION
+                }), 200, headers)
+            else:
+                # Log failed attempt (no sensitive data)
+                logger.warning(f"Failed authentication attempt from IP: {client_ip}")
+
+                return (json.dumps({
+                    'success': False,
+                    'message': 'Invalid password',
+                    'rate_limit_remaining': remaining_attempts - 1
+                }), 401, headers)
 
         if action == 'login':
             # Authenticate password
