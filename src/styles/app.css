@@ -1039,6 +1039,11 @@ button:disabled {
     white-space: nowrap;
 }
 
+/* Risk percentage text - ensures visibility on all backgrounds */
+.risk-percentage-text {
+    color: var(--text-color);
+}
+
 /* Volume circle matching probability circle exactly */
 .volume-circle {
     position: relative;

@@ -141,7 +141,8 @@ function renderRiskCard(type, data, results) {
                     font-family="system-ui, -apple-system, sans-serif"
                     font-size="24"
                     font-weight="bold"
-                    fill="#ffffff"
+                    fill="currentColor"
+                    class="risk-percentage-text"
                     style="pointer-events: none;">
                     ${percent}%
                   </text>
