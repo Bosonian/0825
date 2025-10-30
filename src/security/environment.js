@@ -128,15 +128,15 @@ class EnvironmentConfig {
 
   /**
    * Get research password securely
-   * @returns {string} Research password
+   * @deprecated SECURITY: Password verification now handled by backend API only
+   * @returns {string} Research password (deprecated - returns null)
    */
   getResearchPassword() {
-    // In production, this should come from secure vault or environment
-    // For development, use environment variable with secure fallback
-    const password = this.get('RESEARCH_PASSWORD');
-
-    // If not in environment, use secure default for research (documented in README)
-    return password || 'Neuro25';
+    // SECURITY FIX: Password verification moved to backend Cloud Function
+    // No passwords should be stored or checked in frontend code
+    // This function is deprecated and kept only for backward compatibility
+    console.warn('DEPRECATED: getResearchPassword() should not be used. Password verification is backend-only.');
+    return null;
   }
 
   /**
