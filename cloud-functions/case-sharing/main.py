@@ -17,6 +17,7 @@ CORS(app, resources={
             "https://igfap.eu",              # Primary production domain
             "https://bosonian.github.io",     # GitHub Pages fallback
             "http://localhost:3002",          # Local PWA dev
+            "http://localhost:3020",          # Local PWA preview
             "http://localhost:3001",          # Local kiosk dev
             "http://localhost:4173"           # Local preview
         ],

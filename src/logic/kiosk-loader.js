@@ -17,7 +17,7 @@ export function detectKioskMode() {
   const display = params.get('display');
   const caseId = params.get('caseId');
 
-  const isKioskMode = display === 'kiosk' && caseId;
+  const isKioskMode = display === 'kiosk' && Boolean(caseId);
 
   console.log('[KioskLoader] Kiosk mode detection:', {
     hash,
