@@ -143,4 +143,190 @@ npm run preview      # Preview production build
 - **GFAP Values**: Critical biomarker (29-10001 pg/mL range)
 - **Blood Animation**: Must remain smooth and robust
 
+## Agentic Development System
+
+### Available Agents
+
+We use specialized agents for different aspects of development. Each agent has specific expertise and workflows.
+
+#### 1. **Manager Agents** (Strategic Oversight)
+
+**PWA Manager** - `.claude/agents/pwa-manager.md`
+- **When to use**: Large PWA features, cross-cutting changes, architecture decisions
+- **Expertise**: Frontend architecture, state management, routing, authentication
+- **Capabilities**:
+  - Coordinates across multiple PWA files
+  - Ensures consistency in UI/UX
+  - Manages authentication flows
+  - Handles deployment to GitHub Pages
+
+**Kiosk Manager** - `.claude/agents/kiosk-manager.md`
+- **When to use**: Kiosk display features, case monitoring, real-time updates
+- **Expertise**: Kiosk UI/UX, polling, case visualization, hospital routing
+- **Capabilities**:
+  - Manages kiosk-specific features
+  - Coordinates with Cloud Run backend
+  - Handles real-time case updates
+  - Optimizes for large displays
+
+**Backend Manager** - `.claude/agents/backend-manager.md`
+- **When to use**: API changes, Cloud Functions, database, calculations
+- **Expertise**: GCP deployment, API design, medical calculations, data storage
+- **Capabilities**:
+  - Manages Cloud Functions and Cloud Run services
+  - Handles medical calculation logic
+  - Designs and optimizes APIs
+  - Ensures data integrity and security
+
+#### 2. **Quality Assurance Agents**
+
+**UI/UX Validator** - `.claude/agents/ui-ux-validator.md`
+- **When to use**: After any UI changes, before deployment
+- **Expertise**: Visual design, accessibility, responsive design, user experience
+- **Capabilities**:
+  - Validates color contrast and accessibility
+  - Checks responsive behavior across breakpoints
+  - Ensures design consistency
+  - Verifies user interaction patterns
+
+#### 3. **Agentic Loop Agents** (Iterative Development)
+
+**Spec Creator** - `.claude/agents/spec-creator.md`
+- **When to use**: Starting any new feature or UI component
+- **Expertise**: Requirements analysis, design system, visual specifications
+- **Capabilities**:
+  - Transforms high-level requirements into detailed specs
+  - Creates visual mocks (ASCII art or descriptions)
+  - Defines acceptance criteria
+  - Documents technical requirements
+
+**UI Implementer** - `.claude/agents/ui-implementer.md`
+- **When to use**: Implementing features from specs, iterative refinement
+- **Expertise**: Frontend implementation, Playwright testing, visual verification
+- **Capabilities**:
+  - Implements UI components from specs
+  - Uses Playwright MCP for visual verification
+  - Iterates until spec match achieved
+  - Documents all changes and discrepancies
+
+### Workflows
+
+#### Agentic Development Loop
+**File**: `.claude/workflows/agentic-loop.md`
+
+**Process**:
+```
+User Requirement
+    ↓
+Spec Creator Agent
+    ↓ (detailed spec)
+UI Implementer Agent
+    ↓ (implementation)
+Playwright MCP (screenshots)
+    ↓ (comparison)
+Iteration (if needed)
+    ↓
+Human Review
+    ↓
+Approval & Deploy
+```
+
+**When to use**:
+- New UI features with visual requirements
+- Refinement of existing components
+- Pixel-perfect implementations
+- Cross-browser/device testing
+
+**Example**:
+```bash
+# User: "Add a floating back button in kiosk mode"
+# → Spec Creator: Creates detailed visual spec
+# → UI Implementer: Implements, screenshots, iterates
+# → Human: Reviews screenshots, approves
+# → Deploy
+```
+
+### Testing Infrastructure
+
+#### Playwright Integration
+- **MCP Server**: Installed and configured
+- **Test Scripts**:
+  - `test-kiosk-flow.js` - End-to-end kiosk navigation
+  - `test-kiosk-auth-bypass.js` - Authentication bypass verification
+  - `test-prod-kiosk.js` - Production deployment testing
+
+#### Visual Verification
+- Screenshots captured at 3 viewports (mobile/tablet/desktop)
+- Stored in `test-screenshots/` directory
+- Used for iterative comparison in agentic loop
+
+### Recent Major Changes
+
+#### Kiosk Mode Implementation (Oct 2025)
+- **Feature**: Unified kiosk display using PWA results page
+- **Architecture**: Kiosk shows case list → Click navigates to PWA with `display=kiosk&caseId=xxx`
+- **Authentication**: Bypass implemented in `src/logic/kiosk-loader.js` and `src/ui/render.js`
+- **Files Modified**:
+  - `src/logic/kiosk-loader.js` (NEW) - Kiosk mode detection and case loading
+  - `src/ui/render.js` - Authentication bypass for kiosk mode
+  - `src/ui/screens/results.js` - Conditional UI rendering
+  - `cloud-functions/case-sharing/main.py` - CORS configuration
+  - `kiosk-temp/src/config.js` - Environment-based PWA URL
+
+#### Key Features
+- **Single Source of Truth**: PWA results page serves both normal and kiosk modes
+- **No Code Duplication**: Removed separate kiosk results modal
+- **Seamless Navigation**: Kiosk → PWA → Back to Kiosk workflow
+- **Environment Awareness**: localhost in dev, production URLs in builds
+
+### Agent Usage Guidelines
+
+#### When to Use Which Agent
+
+**Use Manager Agents when**:
+- Making architectural decisions
+- Coordinating changes across multiple files
+- Planning large features
+- Deploying to production
+
+**Use Quality Agents when**:
+- Validating UI changes
+- Ensuring accessibility compliance
+- Checking design consistency
+- Before deploying to production
+
+**Use Agentic Loop when**:
+- Implementing new UI components
+- Requiring pixel-perfect accuracy
+- Need iterative refinement
+- Visual verification is critical
+
+#### Agent Coordination
+
+Agents can work together:
+```
+PWA Manager → Spec Creator → UI Implementer → UI/UX Validator
+```
+
+Example: "Add dark mode toggle"
+1. PWA Manager: Plans integration with theme system
+2. Spec Creator: Defines button appearance and behavior
+3. UI Implementer: Builds component, verifies with screenshots
+4. UI/UX Validator: Checks accessibility and contrast
+
+### Directory Structure
+
+```
+.claude/
+├── agents/              # Agent definitions
+│   ├── pwa-manager.md
+│   ├── kiosk-manager.md
+│   ├── backend-manager.md
+│   ├── ui-ux-validator.md
+│   ├── spec-creator.md
+│   └── ui-implementer.md
+└── workflows/           # Workflow documentation
+    └── agentic-loop.md
+```
+
 This file serves as the project memory. Update it when making significant changes.
