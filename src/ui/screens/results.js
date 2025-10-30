@@ -11,6 +11,7 @@ import {
   calculateICHVolume, estimateVolumeFromGFAP, estimateMortalityFromVolume, formatVolumeDisplay,
 } from '../../logic/ich-volume-calculator.js';
 import { renderCircularBrainDisplay, initializeVolumeAnimations } from '../components/brain-visualization.js';
+import { detectKioskMode, getKioskHomeUrl } from '../../logic/kiosk-loader.js';
 // Dynamic import for React islands to avoid module resolution issues
 // Using React island tachometer instead of the vanilla premium gauge
 import { calculateLegacyICH } from '../../research/legacy-ich-model.js';
@@ -293,6 +294,10 @@ export function renderResults(results, startTime) {
 }
 
 function renderICHFocusedResults(ich, results, startTime, legacyResults, currentModule) {
+  // Detect kiosk mode
+  const kioskMode = detectKioskMode();
+  const isKioskMode = kioskMode.isKioskMode;
+
   const criticalAlert = ich && ich.probability > 0.6 ? renderCriticalAlert() : '';
   const ichPercentLocal = Math.round((ich?.probability || 0) * 100);
   const strokeCenterHtml = renderStrokeCenterMap(results);
@@ -364,15 +369,26 @@ function renderICHFocusedResults(ich, results, startTime, legacyResults, current
       </div>
       
       <div class="results-actions">
-        <div class="primary-actions">
-          <button type="button" class="primary" id="shareToKiosk"> 🚀 ${t('sendToHospital')} </button>
-          <button type="button" class="primary" id="printResults"> 📄 ${t('printResults')} </button>
-          <button type="button" class="secondary" data-action="reset"> ${t('newAssessment')} </button>
-        </div>
-        <div class="navigation-actions">
-          <button type="button" class="tertiary" data-action="goBack"> ← ${t('goBack')} </button>
-          <button type="button" class="tertiary" data-action="goHome"> 🏠 ${t('goHome')} </button>
-        </div>
+        ${isKioskMode ? `
+          <!-- Kiosk Mode: Simple navigation back to case list -->
+          <div class="primary-actions">
+            <button type="button" class="primary" onclick="window.location.href='${getKioskHomeUrl()}'">
+              🏠 Zurück zur Fallliste / Back to Case List
+            </button>
+            <button type="button" class="secondary" id="printResults"> 📄 ${t('printResults')} </button>
+          </div>
+        ` : `
+          <!-- Normal Mode: Full actions -->
+          <div class="primary-actions">
+            <button type="button" class="primary" id="shareToKiosk"> 🚀 ${t('sendToHospital')} </button>
+            <button type="button" class="primary" id="printResults"> 📄 ${t('printResults')} </button>
+            <button type="button" class="secondary" data-action="reset"> ${t('newAssessment')} </button>
+          </div>
+          <div class="navigation-actions">
+            <button type="button" class="tertiary" data-action="goBack"> ← ${t('goBack')} </button>
+            <button type="button" class="tertiary" data-action="goHome"> 🏠 ${t('goHome')} </button>
+          </div>
+        `}
       </div>
       
       <div class="disclaimer">
@@ -386,6 +402,10 @@ function renderICHFocusedResults(ich, results, startTime, legacyResults, current
 }
 
 function renderFullModuleResults(ich, lvo, results, startTime, legacyResults, currentModule) {
+  // Detect kiosk mode
+  const kioskMode = detectKioskMode();
+  const isKioskMode = kioskMode.isKioskMode;
+
   const ichPercent = Math.round((ich?.probability || 0) * 100);
   const lvoPercent = Math.round((lvo?.probability || 0) * 100);
 
@@ -494,15 +514,26 @@ function renderFullModuleResults(ich, lvo, results, startTime, legacyResults, cu
       </div>
       
       <div class="results-actions">
-        <div class="primary-actions">
-          <button type="button" class="primary" id="shareToKiosk"> 🚀 ${t('sendToHospital')} </button>
-          <button type="button" class="primary" id="printResults"> 📄 ${t('printResults')} </button>
-          <button type="button" class="secondary" data-action="reset"> ${t('newAssessment')} </button>
-        </div>
-        <div class="navigation-actions">
-          <button type="button" class="tertiary" data-action="goBack"> ← ${t('goBack')} </button>
-          <button type="button" class="tertiary" data-action="goHome"> 🏠 ${t('goHome')} </button>
-        </div>
+        ${isKioskMode ? `
+          <!-- Kiosk Mode: Simple navigation back to case list -->
+          <div class="primary-actions">
+            <button type="button" class="primary" onclick="window.location.href='${getKioskHomeUrl()}'">
+              🏠 Zurück zur Fallliste / Back to Case List
+            </button>
+            <button type="button" class="secondary" id="printResults"> 📄 ${t('printResults')} </button>
+          </div>
+        ` : `
+          <!-- Normal Mode: Full actions -->
+          <div class="primary-actions">
+            <button type="button" class="primary" id="shareToKiosk"> 🚀 ${t('sendToHospital')} </button>
+            <button type="button" class="primary" id="printResults"> 📄 ${t('printResults')} </button>
+            <button type="button" class="secondary" data-action="reset"> ${t('newAssessment')} </button>
+          </div>
+          <div class="navigation-actions">
+            <button type="button" class="tertiary" data-action="goBack"> ← ${t('goBack')} </button>
+            <button type="button" class="tertiary" data-action="goHome"> 🏠 ${t('goHome')} </button>
+          </div>
+        `}
       </div>
       
       <div class="disclaimer">

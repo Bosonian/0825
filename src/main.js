@@ -14,6 +14,7 @@ import { render } from './ui/render.js';
 import { safeAsync, ERROR_CATEGORIES, ERROR_SEVERITY } from './utils/error-handler.js';
 import { initializeAPIWarmup } from './core/api-warmup.js';
 import { initializeKioskHandlers } from './handlers/kiosk-handlers.js';
+import { detectKioskMode, loadKioskCase } from './logic/kiosk-loader.js';
 
 /**
  * Application instance
@@ -213,6 +214,36 @@ async function main() {
 
     // Initialize the application
     await initializeApplication();
+
+    // Check for kiosk mode and load case data if needed
+    const kioskMode = detectKioskMode();
+    if (kioskMode.isKioskMode) {
+      console.log('[Main] Kiosk mode detected - loading case:', kioskMode.caseId);
+      try {
+        await loadKioskCase(kioskMode.caseId);
+        // Re-render to show the loaded case
+        const container = document.getElementById('appContainer');
+        if (container) {
+          render(container);
+        }
+      } catch (error) {
+        console.error('[Main] Failed to load kiosk case:', error);
+        // Show error message
+        const container = document.getElementById('appContainer');
+        if (container) {
+          container.innerHTML = `
+            <div class="container" style="text-align: center; padding: 40px;">
+              <h2>⚠️ Case Not Found</h2>
+              <p>The requested case could not be loaded.</p>
+              <button onclick="window.location.href='https://igfap.eu/kiosk/'" class="primary">
+                🏠 Return to Case List
+              </button>
+            </div>
+          `;
+        }
+        return; // Don't continue with normal initialization
+      }
+    }
 
     // Initialize kiosk integration handlers
     initializeKioskHandlers();
