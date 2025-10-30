@@ -6,6 +6,7 @@ import { clearValidationErrors, clearAllValidation } from '../logic/validate.js'
 import { initializeResearchMode } from '../research/comparison-ui.js';
 import { authManager } from '../auth/authentication.js';
 import { safeSetInnerHTML } from '../security/html-sanitizer.js';
+import { detectKioskMode } from '../logic/kiosk-loader.js';
 
 import { renderTriage1 } from './screens/triage1.js';
 import { renderTriage2 } from './screens/triage2.js';
@@ -24,26 +25,35 @@ export function render(container) {
     currentScreen, results, startTime, screenHistory,
   } = state;
 
-  console.log('[Render] Rendering screen:', currentScreen, 'Has results:', !!results);
+  // Check if we're in kiosk mode - skip authentication
+  const kioskMode = detectKioskMode();
+  const isKioskMode = kioskMode.isKioskMode;
+
+  console.log('[Render] Rendering screen:', currentScreen, 'Has results:', !!results, 'Kiosk mode:', isKioskMode);
 
   // Optimize DOM updates to prevent CLS
   const tempContainer = document.createElement('div');
 
-  // Show/hide back button based on navigation history
+  // Show/hide back button based on navigation history (hide in kiosk mode)
   const backButton = document.getElementById('backButton');
   if (backButton) {
-    backButton.style.display = screenHistory && screenHistory.length > 0 ? 'flex' : 'none';
+    backButton.style.display = (screenHistory && screenHistory.length > 0 && !isKioskMode) ? 'flex' : 'none';
   }
 
   // Render the appropriate screen
   let html = '';
   switch (currentScreen) {
     case 'login':
-      html = renderLoginScreen();
+      // Skip login screen in kiosk mode
+      if (isKioskMode) {
+        html = renderResults(results, startTime);
+      } else {
+        html = renderLoginScreen();
+      }
       break;
     case 'triage1':
-      // Verify authentication for all clinical screens
-      if (!authManager.isValidSession()) {
+      // Verify authentication for all clinical screens (skip in kiosk mode)
+      if (!isKioskMode && !authManager.isValidSession()) {
         store.navigate('login');
         return;
       }
