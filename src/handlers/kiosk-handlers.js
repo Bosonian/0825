@@ -12,12 +12,15 @@ import { store } from '../state/store.js';
 export function initializeKioskHandlers() {
   // Listen for send to hospital button
   document.addEventListener('click', async (e) => {
-    if (e.target.id === 'shareToKiosk') {
-      await handleSendToHospital(e.target);
+    // Use closest() to handle clicks on button content (emoji, text)
+    const kioskButton = e.target.closest('#shareToKiosk');
+    if (kioskButton) {
+      await handleSendToHospital(kioskButton);
     }
 
     // Stop tracking button
-    if (e.target.id === 'stopTracking') {
+    const stopButton = e.target.closest('#stopTracking');
+    if (stopButton) {
       handleStopTracking();
     }
   });
