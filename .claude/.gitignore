@@ -1,0 +1,9 @@
+# Logs and runtime data - don't commit
+logs/
+cache/
+backups/
+
+# But keep the directories
+!logs/.gitkeep
+!cache/.gitkeep
+!backups/.gitkeep

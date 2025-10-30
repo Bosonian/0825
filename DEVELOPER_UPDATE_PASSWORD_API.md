@@ -123,13 +123,6 @@ curl -X POST \
   https://europe-west3-igfap-452720.cloudfunctions.net/authenticate-research-access
 ```
 
-### Test in Application
-
-1. Open: http://localhost:5173/0825/
-2. Activate research mode (Shift+R or click activation area)
-3. Enter password: `Neuro25`
-4. Check browser DevTools → Network tab for API call
-5. Verify authentication succeeds and app navigates to triage
 
 **Verified Working:** ✅ Tested on October 30, 2025
 

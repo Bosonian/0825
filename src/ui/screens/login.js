@@ -21,30 +21,30 @@ export function renderLoginScreen() {
 
         <div class="login-content">
           <div class="access-notice">
-            <h2>🔬 Research Access Required</h2>
-            <p>This is a research preview of the iGFAP Stroke Triage Assistant for clinical validation.</p>
+            <h2>🔬 ${t('researchAccessRequired')}</h2>
+            <p>${t('researchPreviewDescription')}</p>
 
             <div class="research-disclaimer">
-              <h3>⚠️ Important Notice</h3>
+              <h3>⚠️ ${t('importantNotice')}</h3>
               <ul>
-                <li><strong>Research Use Only</strong> - Not for clinical decision making</li>
-                <li><strong>No Patient Data Storage</strong> - All data processed locally</li>
-                <li><strong>Clinical Advisory</strong> - Under supervision of Prof. Christian Förch & Dr. Lovepreet Kalra</li>
-                <li><strong>Contact:</strong> Deepak Bos (bosdeepak@gmail.com)</li>
+                <li><strong>${t('researchUseOnly')}</strong> - ${t('researchUseOnlyDesc')}</li>
+                <li><strong>${t('noPatientDataStorage')}</strong> - ${t('noPatientDataStorageDesc')}</li>
+                <li><strong>${t('clinicalAdvisory')}</strong> - ${t('clinicalAdvisoryDesc')}</li>
+                <li><strong>${t('contact')}:</strong> Deepak Bos (bosdeepak@gmail.com)</li>
               </ul>
             </div>
           </div>
 
           <form id="loginForm" class="login-form">
             <div class="form-group">
-              <label for="researchPassword">Research Access Code</label>
+              <label for="researchPassword">${t('researchAccessCode')}</label>
               <input
                 type="password"
                 id="researchPassword"
                 name="password"
                 required
                 autocomplete="off"
-                placeholder="Enter research access code"
+                placeholder="${t('enterResearchAccessCode')}"
                 class="password-input"
               >
             </div>
@@ -52,16 +52,16 @@ export function renderLoginScreen() {
             <div id="loginError" class="error-message" style="display: none;"></div>
 
             <button type="submit" class="login-button primary">
-              <span class="button-text">Access Research System</span>
+              <span class="button-text">${t('accessResearchSystem')}</span>
               <span class="loading-spinner" style="display: none;">⏳</span>
             </button>
           </form>
 
           <div class="login-footer">
             <div class="regulatory-notice">
-              <p><strong>Regulatory Status:</strong> Research prototype - CE certification pending</p>
-              <p><strong>Data Protection:</strong> GDPR compliant - local processing only</p>
-              <p><strong>Clinical Oversight:</strong> RKH Klinikum Ludwigsburg, Neurologie</p>
+              <p><strong>${t('regulatoryStatus')}:</strong> ${t('regulatoryStatusDesc')}</p>
+              <p><strong>${t('dataProtection')}:</strong> ${t('dataProtectionDesc')}</p>
+              <p><strong>${t('clinicalOversight')}:</strong> ${t('clinicalOversightDesc')}</p>
             </div>
           </div>
         </div>

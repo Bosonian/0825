@@ -147,7 +147,7 @@ function renderRiskCard(type, data, results) {
                   </text>
                 </svg>
               </div>
-              <div class="circle-label">${type === 'ich' ? 'ICH Risk' : 'LVO Risk'}</div>
+              <div class="circle-label">${type === 'ich' ? t('ichRisk') : t('lvoRisk')}</div>
             </div>
           </div>
           <div class="risk-level ${level}">${riskLevel}</div>
@@ -364,7 +364,7 @@ function renderICHFocusedResults(ich, results, startTime, legacyResults, current
       
       <div class="results-actions">
         <div class="primary-actions">
-          <button type="button" class="primary" id="shareToKiosk"> 🚀 Send to Hospital </button>
+          <button type="button" class="primary" id="shareToKiosk"> 🚀 ${t('sendToHospital')} </button>
           <button type="button" class="primary" id="printResults"> 📄 ${t('printResults')} </button>
           <button type="button" class="secondary" data-action="reset"> ${t('newAssessment')} </button>
         </div>
@@ -494,7 +494,7 @@ function renderFullModuleResults(ich, lvo, results, startTime, legacyResults, cu
       
       <div class="results-actions">
         <div class="primary-actions">
-          <button type="button" class="primary" id="shareToKiosk"> 🚀 Send to Hospital </button>
+          <button type="button" class="primary" id="shareToKiosk"> 🚀 ${t('sendToHospital')} </button>
           <button type="button" class="primary" id="printResults"> 📄 ${t('printResults')} </button>
           <button type="button" class="secondary" data-action="reset"> ${t('newAssessment')} </button>
         </div>

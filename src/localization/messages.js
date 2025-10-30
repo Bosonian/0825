@@ -133,6 +133,9 @@ export const messages = {
     noNegativeFactors: 'No decreasing factors',
     ichRiskFactors: 'ICH Risk Factors',
     lvoRiskFactors: 'LVO Risk Factors',
+    ichRisk: 'ICH Risk',
+    lvoRisk: 'LVO Risk',
+    sendToHospital: 'Send to Hospital',
 
     // Critical Alert
     criticalAlertTitle: 'CRITICAL RISK DETECTED',
@@ -302,6 +305,29 @@ export const messages = {
     unclearTimeWindow: 'With unclear/extended time window, early demarcated brain infarction is also possible',
     rareDiagnoses: 'Rare diagnoses such as glioblastoma are also possible',
 
+    // Login Screen
+    researchAccessRequired: 'Research Access Required',
+    researchPreviewDescription: 'This is a research preview of the iGFAP Stroke Triage Assistant for clinical validation.',
+    importantNotice: 'Important Notice',
+    researchUseOnly: 'Research Use Only',
+    researchUseOnlyDesc: 'Not for clinical decision making',
+    noPatientDataStorage: 'No Patient Data Storage',
+    noPatientDataStorageDesc: 'All data processed locally',
+    clinicalAdvisory: 'Clinical Advisory',
+    clinicalAdvisoryDesc: 'Under supervision of Prof. Christian Förch & Dr. Lovepreet Kalra',
+    contact: 'Contact',
+    researchAccessCode: 'Research Access Code',
+    enterResearchAccessCode: 'Enter research access code',
+    accessResearchSystem: 'Access Research System',
+    regulatoryStatus: 'Regulatory Status',
+    regulatoryStatusDesc: 'Research prototype - CE certification pending',
+    dataProtection: 'Data Protection',
+    dataProtectionDesc: 'GDPR compliant - local processing only',
+    clinicalOversight: 'Clinical Oversight',
+    clinicalOversightDesc: 'RKH Klinikum Ludwigsburg, Neurologie',
+    accessDenied: 'Access Denied',
+    invalidResearchCode: 'Invalid research access code. Please try again.',
+
   },
 
   de: {
@@ -436,6 +462,9 @@ export const messages = {
     noNegativeFactors: 'Keine verringernden Faktoren',
     ichRiskFactors: 'ICB-Risikofaktoren',
     lvoRiskFactors: 'LVO-Risikofaktoren',
+    ichRisk: 'ICB-Risiko',
+    lvoRisk: 'LVO-Risiko',
+    sendToHospital: 'An Krankenhaus senden',
 
     // Critical Alert
     criticalAlertTitle: 'KRITISCHES RISIKO ERKANNT',
@@ -604,6 +633,29 @@ export const messages = {
     reconfirmTimeWindow: 'Bitte Zeitfenster rekonfirmieren!',
     unclearTimeWindow: 'Bei unklarem/erweitertem Zeitfenster ist auch ein beginnend demarkierter Hirninfarkt möglich',
     rareDiagnoses: 'Seltene Diagnosen wie ein Glioblastom sind auch möglich',
+
+    // Login Screen
+    researchAccessRequired: 'Forschungszugang erforderlich',
+    researchPreviewDescription: 'Dies ist eine Forschungsvorschau des iGFAP Schlaganfall-Triage-Assistenten zur klinischen Validierung.',
+    importantNotice: 'Wichtiger Hinweis',
+    researchUseOnly: 'Nur für Forschungszwecke',
+    researchUseOnlyDesc: 'Nicht für klinische Entscheidungen',
+    noPatientDataStorage: 'Keine Patientendatenspeicherung',
+    noPatientDataStorageDesc: 'Alle Daten werden lokal verarbeitet',
+    clinicalAdvisory: 'Klinische Beratung',
+    clinicalAdvisoryDesc: 'Unter Aufsicht von Prof. Christian Förch & Dr. Lovepreet Kalra',
+    contact: 'Kontakt',
+    researchAccessCode: 'Forschungszugangscode',
+    enterResearchAccessCode: 'Forschungszugangscode eingeben',
+    accessResearchSystem: 'Zugang zum Forschungssystem',
+    regulatoryStatus: 'Regulatorischer Status',
+    regulatoryStatusDesc: 'Forschungsprototyp - CE-Zertifizierung ausstehend',
+    dataProtection: 'Datenschutz',
+    dataProtectionDesc: 'DSGVO-konform - nur lokale Verarbeitung',
+    clinicalOversight: 'Klinische Aufsicht',
+    clinicalOversightDesc: 'RKH Klinikum Ludwigsburg, Neurologie',
+    accessDenied: 'Zugriff verweigert',
+    invalidResearchCode: 'Ungültiger Forschungszugangscode. Bitte versuchen Sie es erneut.',
 
   },
 };
