@@ -9,7 +9,7 @@
     <meta name="description" content="Research preview of stroke triage assistant for clinical evaluation" />
     
     <!-- PWA Meta Tags -->
-    <link rel="manifest" href="/0825/manifest.json" />
+    <link rel="manifest" href="/manifest.json" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -18,19 +18,12 @@
     <meta name="msapplication-tap-highlight" content="no" />
     
     <!-- Favicon and Icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/0825/icons/icon-192x192.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/0825/icons/icon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/0825/icons/icon-16x16.png" />
-    <link rel="mask-icon" href="/0825/icons/icon-192x192.png" color="#0066CC" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16x16.png" />
+    <link rel="mask-icon" href="/icons/icon-192x192.png" color="#0066CC" />
     
-  <script type="module" crossorigin src="/0825/assets/index-BumpFyEC.js"></script>
-  <link rel="modulepreload" crossorigin href="/0825/assets/medical-core-BGk_aHbc.js">
-  <link rel="modulepreload" crossorigin href="/0825/assets/enterprise-features-DIAO-rWl.js">
-  <link rel="modulepreload" crossorigin href="/0825/assets/prediction-models-DCU63o_D.js">
-  <link rel="modulepreload" crossorigin href="/0825/assets/research-tools-8qCRDa3H.js">
-  <link rel="modulepreload" crossorigin href="/0825/assets/vendor-MujBQnBx.js">
-  <link rel="modulepreload" crossorigin href="/0825/assets/ui-components-Dv8Jsmg5.js">
-  <link rel="stylesheet" crossorigin href="/0825/assets/index-BvMvgt_9.css">
+    <link rel="stylesheet" href="./src/styles/app.css" />
 </head>
 <body>
 <header class="app-header" role="banner">
@@ -100,5 +93,6 @@
     </div>
 </footer>
 
+<script type="module" src="./src/main.js"></script>
 </body>
 </html>
