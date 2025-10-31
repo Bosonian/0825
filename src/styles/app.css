@@ -642,12 +642,162 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
-.checkbox-label { 
-    font-weight: 400; 
-    font-size: 0.8rem !important; 
-    flex: 1; 
+.checkbox-label {
+    font-weight: 400;
+    font-size: 0.8rem !important;
+    flex: 1;
     letter-spacing: -0.005em;
     line-height: 1.2 !important;
+}
+
+/* Enhanced Coma Module Styles */
+.module-header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(0, 82, 155, 0.05), rgba(0, 82, 155, 0.1));
+    border-radius: 12px;
+    border: 2px solid rgba(0, 82, 155, 0.2);
+}
+
+.module-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.module-subtitle {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-top: 8px;
+    font-weight: 400;
+    letter-spacing: 0.025em;
+}
+
+/* Enhanced Input Styles */
+.enhanced-input {
+    background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+}
+
+.dark-mode .enhanced-input {
+    background: linear-gradient(135deg, rgba(0,0,0,0.1), rgba(0,0,0,0.05));
+}
+
+.enhanced-label {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px !important;
+    flex-wrap: wrap;
+}
+
+.label-icon {
+    font-size: 1.5rem;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+}
+
+.label-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+}
+
+.label-primary {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.label-secondary {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+    font-style: italic;
+}
+
+/* Input Wrapper with Unit */
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-unit {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    background: rgba(0, 82, 155, 0.1);
+    padding: 4px 10px;
+    border-radius: 6px;
+    pointer-events: none;
+    letter-spacing: 0.025em;
+}
+
+.enhanced-number-input {
+    padding-right: 80px !important;
+}
+
+/* Enhanced Help Text */
+.enhanced-help {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: rgba(0, 82, 155, 0.05);
+    border-radius: 6px;
+    border-left: 3px solid var(--primary-color);
+}
+
+.help-icon {
+    font-size: 1.1rem;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+}
+
+/* Enhanced Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.btn-enhanced {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-icon {
+    font-size: 1.3rem;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.2));
+    transition: transform var(--transition-fast);
+}
+
+.btn-enhanced:hover:not(:disabled) .btn-icon {
+    transform: scale(1.15);
+}
+
+.btn-text {
+    font-weight: 500;
+    letter-spacing: -0.005em;
+}
+
+/* Info Tooltip */
+.info-tooltip {
+    cursor: help;
+    font-size: 1.1rem;
+    opacity: 0.7;
+    transition: opacity var(--transition-fast);
+}
+
+.info-tooltip:hover {
+    opacity: 1;
 }
 
 /* Primary and Secondary Buttons */
