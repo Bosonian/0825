@@ -1,22 +1,26 @@
+import { i18n } from '../../localization/i18n.js';
+
 export function renderProgressIndicator(currentStep) {
   const steps = [
-    { id: 1, label: 'Triage', icon: '🎯' },
-    { id: 2, label: 'Assessment', icon: '📋' },
-    { id: 3, label: 'Results', icon: '📊' },
+    { id: 1, labelKey: 'progressTriage', icon: '🎯' },
+    { id: 2, labelKey: 'progressAssessment', icon: '📋' },
+    { id: 3, labelKey: 'progressResults', icon: '📊' },
   ];
 
   let html = '<div class="progress-indicator">';
   steps.forEach((step, index) => {
     const isActive = step.id === currentStep;
     const isCompleted = step.id < currentStep;
+    const label = i18n.t(step.labelKey);
+
     html += `
       <div class="progress-step-container">
         <div class="progress-step ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}"
-             aria-label="${step.label}"
-             title="${step.label}">
+             aria-label="${label}"
+             title="${label}">
           ${isCompleted ? '✓' : step.id}
         </div>
-        <div class="progress-label ${isActive ? 'active' : ''}">${step.label}</div>
+        <div class="progress-label ${isActive ? 'active' : ''}">${label}</div>
       </div>
     `;
     if (index < steps.length - 1) {

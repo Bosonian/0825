@@ -14,7 +14,8 @@ app = Flask(__name__)
 CORS(app, resources={
     r"/*": {
         "origins": [
-            "https://igfap.eu",              # Primary production domain
+            "https://igfap.eu",              # Primary production domain (HTTPS)
+            "http://igfap.eu",               # Primary production domain (HTTP)
             "https://bosonian.github.io",     # GitHub Pages fallback
             "http://localhost:3002",          # Local PWA dev
             "http://localhost:3020",          # Local PWA preview

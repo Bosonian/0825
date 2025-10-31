@@ -14,6 +14,11 @@ export const messages = {
     step2: 'Data Collection',
     step3: 'Results',
 
+    // Progress Indicator
+    progressTriage: 'TRIAGE',
+    progressAssessment: 'ASSESSMENT',
+    progressResults: 'RESULTS',
+
     // Module titles
     comaModuleTitle: 'Coma Module',
     limitedDataModuleTitle: 'Limited Data Module',
@@ -342,6 +347,11 @@ export const messages = {
     step1: 'Erstbeurteilung',
     step2: 'Datenerhebung',
     step3: 'Ergebnisse',
+
+    // Progress Indicator
+    progressTriage: 'TRIAGE',
+    progressAssessment: 'BEURTEILUNG',
+    progressResults: 'ERGEBNISSE',
 
     // Module titles
     comaModuleTitle: 'Koma-Modul',

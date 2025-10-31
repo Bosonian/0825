@@ -13,6 +13,7 @@ import { i18n, t } from '../localization/i18n.js';
 import { safeAsync, ERROR_CATEGORIES } from '../utils/error-handler.js';
 import { safeSetInnerHTML } from '../security/html-sanitizer.js';
 import { render } from '../ui/render.js';
+import { detectKioskMode } from '../logic/kiosk-loader.js';
 
 /**
  * Manages all UI interactions and components
@@ -49,8 +50,18 @@ export class UIManager {
     });
 
     this.addEventListenerSafe('homeButton', 'click', () => {
-      store.goHome();
-      render(this.container);
+      const { isKioskMode } = detectKioskMode();
+
+      if (isKioskMode) {
+        // Navigate back to kiosk case list
+        const isLocalhost = ['localhost', '127.0.0.1', '0.0.0.0'].includes(window.location.hostname);
+        const kioskUrl = isLocalhost ? 'http://localhost:3001/' : 'https://igfap.eu/kiosk/';
+        window.location.href = kioskUrl;
+      } else {
+        // Normal PWA home behavior
+        store.goHome();
+        render(this.container);
+      }
     });
 
     this.addEventListenerSafe('languageToggle', 'click', () => {
