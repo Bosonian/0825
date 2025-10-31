@@ -152,8 +152,9 @@ function sanitizeNode(node, options) {
       // Recursively sanitize children
       sanitizeNode(child, options);
     } else if (child.nodeType === Node.TEXT_NODE) {
-      // Escape text content
-      child.textContent = escapeTextContent(child.textContent);
+      // Text nodes are already safe - they cannot contain HTML markup
+      // No escaping needed; the browser treats them as literal text
+      // Leave text content as-is
     } else {
       // Remove other node types (comments, etc.)
       nodesToRemove.push(child);
