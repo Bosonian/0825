@@ -7,6 +7,7 @@ import { initializeResearchMode } from '../research/comparison-ui.js';
 import { authManager } from '../auth/authentication.js';
 import { safeSetInnerHTML } from '../security/html-sanitizer.js';
 import { detectKioskMode, getKioskHomeUrl } from '../logic/kiosk-loader.js';
+import { mountIslands } from '../react/mountIslands.jsx';
 
 import { renderTriage1 } from './screens/triage1.js';
 import { renderTriage2 } from './screens/triage2.js';
@@ -112,14 +113,18 @@ export function render(container) {
     }, 100);
   }
 
-  // Initialize stroke center map if on results screen
+  // Initialize stroke center map and React islands if on results screen
   if (currentScreen === 'results' && results) {
     setTimeout(() => {
       try {
         console.log('[Render] Initializing stroke center map with results:', results);
         initializeStrokeCenterMap(results);
+
+        // Mount React islands (tachometer, probability rings)
+        console.log('[Render] Mounting React islands...');
+        mountIslands();
       } catch (error) {
-        console.error('[Render] Stroke center map initialization failed:', error);
+        console.error('[Render] Results initialization failed:', error);
       }
     }, 100);
   }
