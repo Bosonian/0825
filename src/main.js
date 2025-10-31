@@ -8,6 +8,7 @@
  * @contact Deepak Bos <bosdeepak@gmail.com>
  */
 
+import './styles/app.css';
 import { createApp } from './core/app-controller.js';
 import { store } from './state/store.js';
 import { render } from './ui/render.js';
