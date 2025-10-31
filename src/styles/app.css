@@ -325,6 +325,28 @@ body {
     background: var(--success-color);
 }
 
+/* Enhanced Progress Indicator */
+.progress-step-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.progress-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: color var(--transition-fast);
+}
+
+.progress-label.active {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
 /* Typography */
 h1 {
     font-size: 2.25rem;
@@ -390,6 +412,23 @@ h4 {
     font-weight: normal;
 }
 
+.help-text {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    cursor: help;
+}
+
+.info-icon {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    transition: opacity var(--transition-fast);
+}
+
+.help-text:hover .info-icon {
+    opacity: 1;
+}
+
 /* Button Styles */
 .triage-buttons {
     display: grid;
@@ -439,6 +478,46 @@ h4 {
 
 .no-btn { background: linear-gradient(135deg, var(--danger-color), #ff1744); }
 .no-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212, 0, 26, 0.3); }
+
+/* Enhanced Triage Buttons with Icons */
+.triage-btn-enhanced {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    padding: 24px 20px !important;
+}
+
+.btn-icon {
+    font-size: 2rem;
+    line-height: 1;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    transition: transform var(--transition-fast);
+}
+
+.triage-btn-enhanced:hover .btn-icon {
+    transform: scale(1.2);
+}
+
+.btn-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+}
+
+.btn-primary-text {
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.btn-secondary-text {
+    font-size: 0.85rem;
+    font-weight: 400;
+    opacity: 0.9;
+    letter-spacing: 0.3px;
+}
 
 /* Form Styles */
 .input-grid {
@@ -4944,6 +5023,18 @@ footer {
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
 }
 
+.logo-icon-svg {
+    width: 80px;
+    height: 80px;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+    animation: pulse-subtle 3s ease-in-out infinite;
+}
+
+@keyframes pulse-subtle {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
 .login-header h1 {
     margin: 0;
     font-size: 1.8rem;
@@ -5088,10 +5179,64 @@ footer {
     padding: var(--space-4) 0 0 0;
 }
 
+.regulatory-details {
+    cursor: pointer;
+    user-select: none;
+}
+
+.regulatory-summary {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    background: var(--background-secondary);
+    border-radius: 8px;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: var(--transition-fast);
+    cursor: pointer;
+    list-style: none;
+}
+
+.regulatory-summary::-webkit-details-marker {
+    display: none;
+}
+
+.regulatory-summary:hover {
+    background: var(--hover-bg);
+}
+
+.regulatory-icon {
+    font-size: 1.1rem;
+}
+
+.toggle-icon {
+    margin-left: auto;
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.regulatory-details[open] .toggle-icon {
+    transform: rotate(-180deg);
+}
+
 .regulatory-notice {
     font-size: 0.85rem;
     color: var(--text-secondary);
     line-height: 1.5;
+    padding: var(--space-4) var(--space-3);
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .regulatory-notice p {

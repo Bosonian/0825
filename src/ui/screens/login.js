@@ -13,7 +13,23 @@ export function renderLoginScreen() {
       <div class="login-card">
         <div class="login-header">
           <div class="app-logo">
-            <div class="logo-icon">🧠</div>
+            <svg class="logo-icon-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="iGFAP Brain Logo">
+              <!-- Brain icon with GFAP molecular structure -->
+              <defs>
+                <linearGradient id="brainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+                </linearGradient>
+              </defs>
+              <!-- Brain outline -->
+              <path d="M50,15 C30,15 15,30 15,50 C15,55 16,60 18,64 C20,68 25,75 30,80 C35,85 45,90 50,90 C55,90 65,85 70,80 C75,75 80,68 82,64 C84,60 85,55 85,50 C85,30 70,15 50,15 Z"
+                    fill="url(#brainGradient)" stroke="white" stroke-width="2"/>
+              <!-- Neural pathways (simplified GFAP structure) -->
+              <path d="M35,35 L42,45 M48,30 L48,50 M58,35 L65,45 M42,55 L42,70 M58,55 L58,70"
+                    stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+              <!-- Center nucleus -->
+              <circle cx="50" cy="50" r="6" fill="white" opacity="0.9"/>
+            </svg>
             <h1>iGFAP Stroke Triage</h1>
             <div class="version-badge">Research Preview v2.1</div>
           </div>
@@ -58,11 +74,18 @@ export function renderLoginScreen() {
           </form>
 
           <div class="login-footer">
-            <div class="regulatory-notice">
-              <p><strong>${t('regulatoryStatus')}:</strong> ${t('regulatoryStatusDesc')}</p>
-              <p><strong>${t('dataProtection')}:</strong> ${t('dataProtectionDesc')}</p>
-              <p><strong>${t('clinicalOversight')}:</strong> ${t('clinicalOversightDesc')}</p>
-            </div>
+            <details class="regulatory-details">
+              <summary class="regulatory-summary">
+                <span class="regulatory-icon">ℹ️</span>
+                <span>${t('regulatoryInformation') || 'Regulatory Information'}</span>
+                <span class="toggle-icon">▼</span>
+              </summary>
+              <div class="regulatory-notice">
+                <p><strong>${t('regulatoryStatus')}:</strong> ${t('regulatoryStatusDesc')}</p>
+                <p><strong>${t('dataProtection')}:</strong> ${t('dataProtectionDesc')}</p>
+                <p><strong>${t('clinicalOversight')}:</strong> ${t('clinicalOversightDesc')}</p>
+              </div>
+            </details>
           </div>
         </div>
       </div>
