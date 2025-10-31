@@ -6,7 +6,7 @@ import { clearValidationErrors, clearAllValidation } from '../logic/validate.js'
 import { initializeResearchMode } from '../research/comparison-ui.js';
 import { authManager } from '../auth/authentication.js';
 import { safeSetInnerHTML } from '../security/html-sanitizer.js';
-import { detectKioskMode } from '../logic/kiosk-loader.js';
+import { detectKioskMode, getKioskHomeUrl } from '../logic/kiosk-loader.js';
 
 import { renderTriage1 } from './screens/triage1.js';
 import { renderTriage2 } from './screens/triage2.js';
@@ -189,6 +189,12 @@ function attachEvents(container) {
           break;
         case 'goHome':
           goHome();
+          break;
+        case 'reload':
+          window.location.reload();
+          break;
+        case 'kiosk-home':
+          window.location.href = getKioskHomeUrl();
           break;
       }
     });

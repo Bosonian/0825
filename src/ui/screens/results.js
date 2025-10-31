@@ -230,7 +230,7 @@ export function renderResults(results, startTime) {
           <div class="error-message">
             <h2>No Results Available</h2>
             <p>Please complete an assessment first.</p>
-            <button class="primary" onclick="window.location.reload()">Start Over</button>
+            <button class="primary" data-action="reload">Start Over</button>
           </div>
         </div>
       `;
@@ -286,7 +286,7 @@ export function renderResults(results, startTime) {
         <div class="error-message">
           <h2>Error Displaying Results</h2>
           <p>There was an error displaying the results. Error: ${error.message}</p>
-          <button class="primary" onclick="window.location.reload()">Start Over</button>
+          <button class="primary" data-action="reload">Start Over</button>
         </div>
       </div>
     `;
@@ -372,7 +372,7 @@ function renderICHFocusedResults(ich, results, startTime, legacyResults, current
         ${isKioskMode ? `
           <!-- Kiosk Mode: Simple navigation back to case list -->
           <div class="primary-actions">
-            <button type="button" class="primary" onclick="window.location.href='${getKioskHomeUrl()}'">
+            <button type="button" class="primary" data-action="kiosk-home">
               🏠 Zurück zur Fallliste / Back to Case List
             </button>
             <button type="button" class="secondary" id="printResults"> 📄 ${t('printResults')} </button>
@@ -517,7 +517,7 @@ function renderFullModuleResults(ich, lvo, results, startTime, legacyResults, cu
         ${isKioskMode ? `
           <!-- Kiosk Mode: Simple navigation back to case list -->
           <div class="primary-actions">
-            <button type="button" class="primary" onclick="window.location.href='${getKioskHomeUrl()}'">
+            <button type="button" class="primary" data-action="kiosk-home">
               🏠 Zurück zur Fallliste / Back to Case List
             </button>
             <button type="button" class="secondary" id="printResults"> 📄 ${t('printResults')} </button>
