@@ -1,9 +1,17 @@
 # Stroke Triage Assistant - Project Context
 
-## Restore Point: 2025-08-31 21:50:52 CEST
+## Latest Restore Point: 2025-10-31 (HTML Entity Fix)
+Successfully fixed HTML entity double-encoding bug affecting all UI text.
+
+### Git Commit at Latest Restore Point
+- Commit: a31e0cf (Fix HTML entity double-encoding in sanitizer)
+- Date: October 31, 2025
+- State: All UI text renders correctly (< / ' etc. display properly, not as &lt; &#x2F; &#x27;)
+
+### Previous Restore Point: 2025-08-31 21:50:52 CEST
 Successfully fixed mobile ring alignment issues. Both ICH Risk and Volume rings display correctly.
 
-### Git Commit at Restore Point
+### Git Commit at Previous Restore Point
 - Commit: ab9622a (Fix mobile ring alignment by removing transform scale conflicts)
 - Date: August 31, 2025, 21:50 CEST
 - State: All rings perfectly aligned on mobile devices (iPhone & Android)
@@ -108,6 +116,85 @@ src/
    - 50-70% shows orange
    - Below 50% shows blue
 
+### Critical Bug Fixes (October 2025)
+
+#### 1. **HTML Entity Double-Encoding Bug** ⭐ CRITICAL
+**File**: `src/security/html-sanitizer.js:154-158`
+
+**Problem**: UI text was displaying HTML entities instead of actual characters:
+- "Glasgow Coma Scale &lt; 9" instead of "<"
+- "GFAP Value (pg&#x2F;mL)" instead of "/"
+- "Patient&#x27;s age in years" instead of "'"
+
+**Root Cause**: The sanitizer was calling `escapeTextContent()` on DOM text nodes, which cannot contain HTML by definition. This caused double-escaping.
+
+**Fix**: Removed unnecessary escaping of text nodes:
+```javascript
+// BEFORE (BUGGY):
+else if (child.nodeType === Node.TEXT_NODE) {
+  child.textContent = escapeTextContent(child.textContent);
+}
+
+// AFTER (FIXED):
+else if (child.nodeType === Node.TEXT_NODE) {
+  // Text nodes are already safe - they cannot contain HTML markup
+  // No escaping needed; the browser treats them as literal text
+  // Leave text content as-is
+}
+```
+
+**Commit**: a31e0cf
+
+#### 2. **Authentication Rate Limiting (429 Errors)**
+**File**: `src/core/api-warmup.js`
+
+**Problem**: Login with correct password returned HTTP 429 (Too Many Requests)
+
+**Root Cause**: API warmup service was calling authentication endpoint on page load with invalid token, exhausting rate limit
+
+**Fix**: Removed authentication endpoint from warmup service
+
+**Commit**: 96ef744
+
+#### 3. **React Islands Not Mounting**
+**File**: `src/ui/render.js`
+
+**Problem**: Tachometer/speedometer not appearing on results page
+
+**Root Cause**: `mountIslands()` function existed but was never being called
+
+**Fix**:
+1. Added import: `import { mountIslands } from '../react/mountIslands.jsx';`
+2. Called `mountIslands()` after results screen renders
+
+**Commit**: 22ff786
+
+#### 4. **Kiosk XSS False Positive**
+**File**: `src/ui/screens/results.js`
+
+**Problem**: Inline `onclick` handlers triggered XSS detection pattern `/on\w+\s*=/gi`
+
+**Fix**: Replaced with data-action attributes and event delegation
+```javascript
+// Before:
+<button onclick="window.location.reload()">Start Over</button>
+
+// After:
+<button data-action="reload">Start Over</button>
+```
+
+**Commit**: a2d9e16
+
+#### 5. **Deployment Issues**
+**Problem**: GitHub Pages serving source files instead of built assets
+
+**Fix**: Always copy after build:
+```bash
+npm run build
+cp dist/index.html index.html
+cp -r dist/assets/ assets/
+```
+
 ### API Endpoints (GCP Cloud Functions)
 - Coma: `predict_coma_ich`
 - Limited: `predict_limited_data_ich`
@@ -189,6 +276,72 @@ We use specialized agents for different aspects of development. Each agent has s
   - Ensures design consistency
   - Verifies user interaction patterns
 
+**Visual Tester** - `.claude/agents/visual-tester.md`
+- **When to use**: After UI changes, before production deployments, when text encoding issues suspected
+- **Expertise**: Visual rendering verification, HTML entity detection, screenshot testing
+- **Capabilities**:
+  - Captures screenshots of all major screens
+  - Detects HTML entities in rendered UI (&lt;, &#x2F;, &#x27;, etc.)
+  - Validates critical medical text renders correctly
+  - Reports issues by severity (CRITICAL/HIGH/MEDIUM)
+- **Test Script**: `test-visual-rendering.js`
+- **Test Coverage**: Login, Triage, Forms, Results, Kiosk Mode
+- **Example Issue Detection**:
+  ```
+  ❌ CRITICAL: HTML entity detected
+     Screen: triage
+     Found: "Glasgow Coma Scale &lt; 9"
+     Expected: "Glasgow Coma Scale < 9"
+  ```
+
+**UX Explorer** - `.claude/agents/ux-explorer.md`
+- **When to use**: BEFORE making any UI/UX recommendations, when reviewing any interface
+- **Expertise**: Complete UI exploration, interaction testing, state discovery
+- **Key Principle**: **Explore first, recommend later** (NEVER assume features don't exist)
+- **Capabilities**:
+  - Finds and tests ALL interactive elements (buttons, toggles, links)
+  - Discovers all UI states (dark/light mode, expanded/collapsed, etc.)
+  - Tests every user flow end-to-end
+  - Captures screenshots of every state
+  - Only provides evidence-based recommendations
+- **Test Script**: `test-intelligent-ux-explorer.js`
+- **Anti-Pattern**: ❌ Making recommendations without testing features first
+- **Best Practice**: ✅ Test every toggle, click every button, explore every state
+- **Example Output**:
+  ```
+  🔍 DISCOVERY PHASE:
+     Found: Dark/Light mode toggle ✅
+     Tested: Both states captured
+     Evidence: screenshot-dark.png, screenshot-light.png
+
+  💡 RECOMMENDATIONS:
+     Based on testing 15 elements across 8 states...
+  ```
+
+**Human UX Evaluator** - `.claude/agents/human-ux-evaluator.md`
+- **When to use**: For comprehensive UX evaluation, measuring user experience quality
+- **Expertise**: Simulates human user behavior, measures experiential quality
+- **Unique Approach**: Thinks like a real user, evaluates like a UX professional
+- **Evaluation Framework**:
+  1. **First Impressions** (0-5 seconds) - What draws attention? Is purpose clear?
+  2. **Visual Quality** - Hierarchy, color scheme, typography, consistency
+  3. **Interaction Quality** - Response times, feedback, affordances
+  4. **Task Completion** - Can users achieve their goals? Where's friction?
+  5. **Emotional Response** - Trust, cognitive comfort, frustration points
+- **Key Metrics**:
+  - Load time perception (instant <100ms, responsive <300ms, delayed >1s)
+  - Cognitive load (choices presented, visual complexity, navigation depth)
+  - Trust signals (professional design, security indicators, error prevention)
+  - Task completion time and success rate
+- **Output**: Comprehensive scored report (X/10) with evidence-based recommendations
+- **Example Insights**:
+  ```
+  ⚠️  Form submission takes 2.3s with no loading indicator
+     Impact: HIGH - Users unsure if system is working
+     Effort: LOW
+     Fix: Add <LoadingSpinner /> component
+  ```
+
 #### 3. **Agentic Loop Agents** (Iterative Development)
 
 **Spec Creator** - `.claude/agents/spec-creator.md`
@@ -254,11 +407,27 @@ Approval & Deploy
   - `test-kiosk-flow.js` - End-to-end kiosk navigation
   - `test-kiosk-auth-bypass.js` - Authentication bypass verification
   - `test-prod-kiosk.js` - Production deployment testing
+  - `test-visual-rendering.js` - **Visual rendering verification (HTML entity detection)**
 
 #### Visual Verification
 - Screenshots captured at 3 viewports (mobile/tablet/desktop)
 - Stored in `test-screenshots/` directory
 - Used for iterative comparison in agentic loop
+
+#### Visual Testing Agent
+**Purpose**: Catch visual bugs that source code review misses
+
+**Usage**:
+```bash
+node test-visual-rendering.js
+```
+
+**What it detects**:
+- HTML entities in rendered UI (&lt;, &gt;, &#x27;, &#x2F;, etc.)
+- Critical medical text accuracy (GCS < 9, pg/mL, etc.)
+- Accessibility issues in rendered output
+
+**Recent Success**: Detected HTML entity double-encoding bug affecting all UI text across login, triage, forms, and results screens. All tests now pass: ✅✅✅
 
 ### Recent Major Changes
 
@@ -290,10 +459,11 @@ Approval & Deploy
 - Deploying to production
 
 **Use Quality Agents when**:
-- Validating UI changes
-- Ensuring accessibility compliance
-- Checking design consistency
-- Before deploying to production
+- Validating UI changes (UI/UX Validator)
+- Ensuring accessibility compliance (UI/UX Validator)
+- Checking design consistency (UI/UX Validator)
+- Verifying text renders correctly without HTML entities (Visual Tester)
+- Before deploying to production (both UI/UX Validator and Visual Tester)
 
 **Use Agentic Loop when**:
 - Implementing new UI components
@@ -305,7 +475,7 @@ Approval & Deploy
 
 Agents can work together:
 ```
-PWA Manager → Spec Creator → UI Implementer → UI/UX Validator
+PWA Manager → Spec Creator → UI Implementer → UI/UX Validator → Visual Tester
 ```
 
 Example: "Add dark mode toggle"
@@ -313,6 +483,7 @@ Example: "Add dark mode toggle"
 2. Spec Creator: Defines button appearance and behavior
 3. UI Implementer: Builds component, verifies with screenshots
 4. UI/UX Validator: Checks accessibility and contrast
+5. Visual Tester: Verifies all text renders correctly across all screens
 
 ### Directory Structure
 
@@ -323,10 +494,21 @@ Example: "Add dark mode toggle"
 │   ├── kiosk-manager.md
 │   ├── backend-manager.md
 │   ├── ui-ux-validator.md
+│   ├── visual-tester.md          # Visual rendering verification
+│   ├── ux-explorer.md            # NEW: Intelligent UI exploration
+│   ├── human-ux-evaluator.md     # NEW: Human-like UX evaluation
 │   ├── spec-creator.md
 │   └── ui-implementer.md
 └── workflows/           # Workflow documentation
     └── agentic-loop.md
+
+# Testing scripts
+test-visual-rendering.js              # Visual testing (HTML entity detection)
+test-intelligent-ux-explorer.js       # Complete UI exploration
+test-comprehensive-ux-journey.js      # End-to-end workflow testing
+test-exhaustive-clinical-workflow.js  # Clinical assessment flows
+test-version-comparison-v2.js         # Version comparison testing
+test-screenshots/                     # Visual test evidence
 ```
 
 This file serves as the project memory. Update it when making significant changes.

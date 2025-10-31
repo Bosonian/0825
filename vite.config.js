@@ -96,7 +96,7 @@ export default defineConfig({
     },
     minify: 'esbuild', // Use esbuild for faster builds
     esbuild: {
-      drop: ['console', 'debugger'], // Remove console.logs and debuggers in production
+      drop: ['debugger'], // Keep console.logs for debugging, only remove debuggers
       legalComments: 'none',
     },
   },
