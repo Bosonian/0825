@@ -90,8 +90,7 @@ export default defineConfig({
             return 'vendor';
           }
 
-          // Default main chunk for core app logic
-          return 'main';
+          // Let Vite handle the entry chunk automatically (no explicit return)
         },
       },
     },
