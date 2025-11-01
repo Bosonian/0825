@@ -3,6 +3,9 @@
  * Handles generating shareable links and managing shared case state
  */
 
+import { store } from '../state/store.js';
+import { KIOSK_CONFIG } from '../config.js';
+
 /**
  * Generate unique case code
  * Format: ABC1234 (3 letters + 4 digits)
@@ -28,28 +31,106 @@ function generateCaseCode() {
 
 /**
  * Generate shareable link for current case
- * @returns {string} Shareable URL
+ * @returns {Promise<string>} Shareable URL
  */
-export function generateShareLink() {
-  const caseCode = generateCaseCode();
-  const timestamp = Date.now();
+export async function generateShareLink() {
+  try {
+    const caseCode = generateCaseCode();
+    const timestamp = Date.now();
 
-  // Store case data in sessionStorage with code
-  const caseData = {
-    code: caseCode,
-    timestamp,
-  };
+    // Get current state
+    const state = store.getState();
+    const { results, formData } = state;
 
-  sessionStorage.setItem(`case_${caseCode}`, JSON.stringify(caseData));
+    if (!results) {
+      throw new Error('No assessment results available to share');
+    }
 
-  // Generate URL
-  const baseUrl = window.location.origin;
-  const path = window.location.pathname;
-  const shareUrl = `${baseUrl}${path}#/results?caseId=${caseCode}&source=shared&ts=${timestamp}`;
+    // Prepare case data for backend storage
+    const caseData = {
+      caseId: caseCode,
+      results,
+      formData,
+      timestamp,
+      sharedAt: new Date().toISOString(),
+      expiresAt: new Date(timestamp + 60 * 60 * 1000).toISOString(), // 1 hour expiry
+    };
 
-  console.log('[CaseShareLink] Generated share link:', shareUrl);
+    // Store case data on backend
+    const response = await fetch(`${KIOSK_CONFIG.caseSharingUrl}/store-shared-case`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(caseData),
+    });
 
-  return shareUrl;
+    if (!response.ok) {
+      throw new Error(`Failed to store case: ${response.statusText}`);
+    }
+
+    const result = await response.json();
+    console.log('[CaseShareLink] Case stored on backend:', result);
+
+    // Also store locally as fallback
+    localStorage.setItem(`shared_case_${caseCode}`, JSON.stringify(caseData));
+
+    // Generate URL
+    const baseUrl = window.location.origin;
+    const path = window.location.pathname;
+    const shareUrl = `${baseUrl}${path}#/results?caseId=${caseCode}&source=shared&ts=${timestamp}`;
+
+    console.log('[CaseShareLink] Generated share link:', shareUrl);
+
+    return shareUrl;
+  } catch (error) {
+    console.error('[CaseShareLink] Failed to generate share link:', error);
+
+    // Fallback: try to generate link with local storage only
+    const caseCode = generateCaseCode();
+    const timestamp = Date.now();
+    const state = store.getState();
+
+    localStorage.setItem(`shared_case_${caseCode}`, JSON.stringify({
+      caseId: caseCode,
+      results: state.results,
+      formData: state.formData,
+      timestamp,
+    }));
+
+    const baseUrl = window.location.origin;
+    const path = window.location.pathname;
+    return `${baseUrl}${path}#/results?caseId=${caseCode}&source=shared&ts=${timestamp}`;
+  }
+}
+
+/**
+ * Load shared case data
+ * @param {string} caseId - Case ID from URL
+ * @returns {Promise<Object>} Case data
+ */
+export async function loadSharedCase(caseId) {
+  try {
+    // Try to fetch from backend first
+    const response = await fetch(`${KIOSK_CONFIG.caseSharingUrl}/get-shared-case/${caseId}`);
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log('[CaseShareLink] Loaded case from backend:', caseId);
+      return data;
+    }
+  } catch (error) {
+    console.warn('[CaseShareLink] Failed to load from backend, trying local storage:', error);
+  }
+
+  // Fallback to local storage
+  const localData = localStorage.getItem(`shared_case_${caseId}`);
+  if (localData) {
+    console.log('[CaseShareLink] Loaded case from local storage:', caseId);
+    return JSON.parse(localData);
+  }
+
+  throw new Error('Case not found');
 }
 
 /**

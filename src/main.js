@@ -17,6 +17,7 @@ import { initializeAPIWarmup } from './core/api-warmup.js';
 import { initializeKioskHandlers } from './handlers/kiosk-handlers.js';
 import { initializeShareHandlers } from './handlers/share-handlers.js';
 import { detectKioskMode, loadKioskCase } from './logic/kiosk-loader.js';
+import { detectSharedLink, loadSharedCase } from './services/case-share-link.js';
 
 /**
  * Application instance
@@ -216,6 +217,50 @@ async function main() {
 
     // Initialize the application
     await initializeApplication();
+
+    // Check for shared link and load case data if needed
+    const sharedInfo = detectSharedLink();
+    if (sharedInfo.isShared && sharedInfo.caseId) {
+      console.log('[Main] Shared link detected - loading case:', sharedInfo.caseId);
+      try {
+        const caseData = await loadSharedCase(sharedInfo.caseId);
+
+        // Populate store with loaded case data
+        if (caseData.results) {
+          store.setState({ results: caseData.results });
+        }
+        if (caseData.formData) {
+          store.setState({ formData: caseData.formData });
+        }
+
+        // Navigate to results screen
+        store.navigate('results');
+
+        // Re-render to show the loaded case
+        const container = document.getElementById('appContainer');
+        if (container) {
+          render(container);
+        }
+
+        console.log('[Main] Shared case loaded successfully');
+      } catch (error) {
+        console.error('[Main] Failed to load shared case:', error);
+        // Show error message
+        const container = document.getElementById('appContainer');
+        if (container) {
+          container.innerHTML = `
+            <div class="container" style="text-align: center; padding: 40px;">
+              <h2>⚠️ Case Not Found</h2>
+              <p>The requested shared case could not be loaded. It may have expired or been deleted.</p>
+              <button onclick="window.location.href='https://igfap.eu/0825/'" class="primary">
+                🏠 Return to App
+              </button>
+            </div>
+          `;
+        }
+        return; // Don't continue with normal initialization
+      }
+    }
 
     // Check for kiosk mode and load case data if needed
     const kioskMode = detectKioskMode();

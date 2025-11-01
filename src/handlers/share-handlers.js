@@ -45,7 +45,7 @@ async function handleShareCase(button) {
     button.textContent = '⏳ Generiere Link... / Generating Link...';
 
     // Generate shareable link
-    const shareUrl = generateShareLink();
+    const shareUrl = await generateShareLink();
 
     // Copy to clipboard
     const copied = await copyToClipboard(shareUrl);
