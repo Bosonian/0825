@@ -141,6 +141,13 @@ export const messages = {
     ichRisk: 'ICH Risk',
     lvoRisk: 'LVO Risk',
     sendToHospital: 'Send to Hospital',
+    shareCase: 'Share Case Link',
+    shareCaseCopied: 'Link copied! Ready to share via WhatsApp',
+    seenByAvD: 'Seen by attending physician (AvD)',
+    submitAcknowledgment: 'Confirm',
+    acknowledgmentSuccess: 'Acknowledged successfully',
+    caseExpired: 'This case is older than 1 hour',
+    caseShared: 'Shared Case',
 
     // Critical Alert
     criticalAlertTitle: 'CRITICAL RISK DETECTED',
@@ -475,6 +482,13 @@ export const messages = {
     ichRisk: 'ICB-Risiko',
     lvoRisk: 'LVO-Risiko',
     sendToHospital: 'An Krankenhaus senden',
+    shareCase: 'Fall-Link teilen',
+    shareCaseCopied: 'Link kopiert! Bereit zum Teilen per WhatsApp',
+    seenByAvD: 'Gesehen vom Arzt vom Dienst (AvD)',
+    submitAcknowledgment: 'Bestätigen',
+    acknowledgmentSuccess: 'Erfolgreich bestätigt',
+    caseExpired: 'Dieser Fall ist älter als 1 Stunde',
+    caseShared: 'Geteilter Fall',
 
     // Critical Alert
     criticalAlertTitle: 'KRITISCHES RISIKO ERKANNT',

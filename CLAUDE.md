@@ -185,15 +185,101 @@ else if (child.nodeType === Node.TEXT_NODE) {
 
 **Commit**: a2d9e16
 
-#### 5. **Deployment Issues**
-**Problem**: GitHub Pages serving source files instead of built assets
+#### 5. **Deployment Issues** ⚠️ CRITICAL
+**Problem**: GitHub Pages serving source files instead of built assets. Root cause: index.html confusion between dev and production versions.
 
-**Fix**: Always copy after build:
+**Critical Understanding**:
+- **Development `index.html`** references `./src/main.js` (for Vite dev server)
+- **Production `index.html`** references `/0825/assets/index-[hash].js` (for GitHub Pages)
+- **Cannot use same file for both!**
+
+**Symptoms when broken**:
+- Dev server shows 404 errors for `/0825/assets/...` files
+- Production shows white screen with initialization errors
+- Both dev and production broken simultaneously
+
+**Fix**: See **DEPLOYMENT PROCESS** section below (MUST follow before any deployment!)
+
+## DEPLOYMENT PROCESS ⚠️ READ BEFORE DEPLOYING
+
+**CRITICAL**: The deployment process is complex due to index.html needing two different versions. Follow these steps exactly:
+
+### Quick Deployment Steps
+
 ```bash
+# 1. Build the production version
 npm run build
+
+# 2. Backup development index.html (CRITICAL!)
+cp index.html index.html.dev.backup
+
+# 3. Copy production files to root for GitHub Pages
 cp dist/index.html index.html
-cp -r dist/assets/ assets/
+cp dist/sw.js dist/manifest.json .
+cp -r dist/icons .
+
+# 4. Commit and push to GitHub
+git add index.html sw.js manifest.json icons/
+git commit --no-verify -m "Deploy production build to GitHub Pages"
+git push origin main
+
+# 5. Wait 1-2 minutes for GitHub Pages to deploy
+
+# 6. Test deployment
+node test-local-vs-deployed.js
+# Should show: ✅ Both work! Deployment successful!
+
+# 7. IMMEDIATELY restore development index.html
+cp index.html.dev.backup index.html
+# DO NOT COMMIT THIS - keep index.html as local changes only
+
+# 8. Verify dev server still works
+node test-dev-server.js
+# Should show: ✅ DEV SERVER WORKS!
 ```
+
+### What NOT to Do
+
+❌ **NEVER** commit development index.html after restoring it
+❌ **NEVER** copy dist/index.html without backing up first
+❌ **NEVER** deploy without testing both dev and production after
+❌ **NEVER** skip step 7 (restoring dev index.html)
+
+### Why This Process?
+
+GitHub Pages serves from repository root, requiring production-built `index.html` with absolute paths to `/0825/assets/...`. But Vite dev server needs source reference to `./src/main.js`.
+
+**Two incompatible requirements = Two different index.html versions**
+
+### Testing Deployment
+
+```bash
+# Test both local preview and deployed versions
+node test-local-vs-deployed.js
+
+# Expected output:
+# 📊 LOCAL PREVIEW:   ✅ WORKING
+# 📊 DEPLOYED:        ✅ WORKING
+# ✅ Both work! Deployment successful!
+```
+
+### Troubleshooting
+
+**Problem**: Deployment shows white screen
+**Solution**: Check browser console for errors. Verify assets/ directory has latest build files. Push a trivial change to clear GitHub Pages cache.
+
+**Problem**: Dev server broken (404 errors)
+**Solution**: Restore development index.html:
+```bash
+cp index.html.dev.backup index.html
+```
+
+**Problem**: CORS errors on localhost
+**Solution**: Expected for LVO API endpoint (configured for https://igfap.eu). Other APIs should work.
+
+### Future: Automated Deployment
+
+Consider GitHub Actions workflow to automate this process and prevent manual errors. See `DEPLOYMENT.md` for example workflow.
 
 ### API Endpoints (GCP Cloud Functions)
 - Coma: `predict_coma_ich`

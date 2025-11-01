@@ -15,6 +15,7 @@ import { render } from './ui/render.js';
 import { safeAsync, ERROR_CATEGORIES, ERROR_SEVERITY } from './utils/error-handler.js';
 import { initializeAPIWarmup } from './core/api-warmup.js';
 import { initializeKioskHandlers } from './handlers/kiosk-handlers.js';
+import { initializeShareHandlers } from './handlers/share-handlers.js';
 import { detectKioskMode, loadKioskCase } from './logic/kiosk-loader.js';
 
 /**
@@ -248,6 +249,9 @@ async function main() {
 
     // Initialize kiosk integration handlers
     initializeKioskHandlers();
+
+    // Initialize share link handlers
+    initializeShareHandlers();
 
     // Application started successfully
     const event = new CustomEvent('appReady', {

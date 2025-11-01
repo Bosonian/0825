@@ -12,6 +12,7 @@ import {
 } from '../../logic/ich-volume-calculator.js';
 import { renderCircularBrainDisplay, initializeVolumeAnimations } from '../components/brain-visualization.js';
 import { detectKioskMode, getKioskHomeUrl } from '../../logic/kiosk-loader.js';
+import { generateShareLink, copyToClipboard, detectSharedLink, isCaseExpired, submitAcknowledgment, isAcknowledged } from '../../services/case-share-link.js';
 // Dynamic import for React islands to avoid module resolution issues
 // Using React island tachometer instead of the vanilla premium gauge
 import { calculateLegacyICH } from '../../research/legacy-ich-model.js';
@@ -220,6 +221,59 @@ function renderLVONotPossible() {
   `;
 }
 
+/**
+ * Render shared case banner and acknowledgment UI
+ */
+function renderSharedCaseBanner() {
+  const sharedInfo = detectSharedLink();
+
+  if (!sharedInfo.isShared) {
+    return '';
+  }
+
+  const expired = isCaseExpired(sharedInfo.timestamp);
+  const acknowledged = isAcknowledged(sharedInfo.caseId);
+
+  return `
+    <div class="shared-case-banner ${expired ? 'expired' : ''}">
+      <div class="banner-header">
+        <span class="banner-icon">📲</span>
+        <h3>${t('caseShared')}</h3>
+        <span class="case-id">ID: ${sharedInfo.caseId}</span>
+      </div>
+
+      ${expired ? `
+        <div class="expiration-warning">
+          <span class="warning-icon">⏰</span>
+          <span>${t('caseExpired')}</span>
+        </div>
+      ` : ''}
+
+      ${!acknowledged ? `
+        <div class="acknowledgment-section">
+          <label class="acknowledgment-checkbox">
+            <input type="checkbox" id="avdAcknowledgment" />
+            <span>${t('seenByAvD')}</span>
+          </label>
+          <button
+            type="button"
+            class="acknowledgment-button"
+            id="submitAcknowledgment"
+            disabled>
+            ${t('submitAcknowledgment')}
+          </button>
+          <div class="acknowledgment-status" id="acknowledgmentStatus"></div>
+        </div>
+      ` : `
+        <div class="acknowledged-status">
+          <span class="check-icon">✓</span>
+          <span>${t('acknowledgmentSuccess')}</span>
+        </div>
+      `}
+    </div>
+  `;
+}
+
 export function renderResults(results, startTime) {
   try {
     // Add error handling for missing results
@@ -315,6 +369,7 @@ function renderICHFocusedResults(ich, results, startTime, legacyResults, current
   return `
     <div class="container">
       ${renderProgressIndicator(3)}
+      ${renderSharedCaseBanner()}
       <h2>${t('bleedingRiskAssessment') || 'Blutungsrisiko-Bewertung / Bleeding Risk Assessment'}</h2>
       ${criticalAlert}
       
@@ -381,6 +436,7 @@ function renderICHFocusedResults(ich, results, startTime, legacyResults, current
           <!-- Normal Mode: Full actions -->
           <div class="primary-actions">
             <button type="button" class="primary" id="shareToKiosk"> 🚀 ${t('sendToHospital')} </button>
+            <button type="button" class="primary" id="shareCaseLink"> 📲 ${t('shareCase')} </button>
             <button type="button" class="primary" id="printResults"> 📄 ${t('printResults')} </button>
             <button type="button" class="secondary" data-action="reset"> ${t('newAssessment')} </button>
           </div>
@@ -466,6 +522,7 @@ function renderFullModuleResults(ich, lvo, results, startTime, legacyResults, cu
   return `
     <div class="container">
       ${renderProgressIndicator(3)}
+      ${renderSharedCaseBanner()}
       <h2>${t('resultsTitle')}</h2>
       ${criticalAlert}
       
@@ -526,6 +583,7 @@ function renderFullModuleResults(ich, lvo, results, startTime, legacyResults, cu
           <!-- Normal Mode: Full actions -->
           <div class="primary-actions">
             <button type="button" class="primary" id="shareToKiosk"> 🚀 ${t('sendToHospital')} </button>
+            <button type="button" class="primary" id="shareCaseLink"> 📲 ${t('shareCase')} </button>
             <button type="button" class="primary" id="printResults"> 📄 ${t('printResults')} </button>
             <button type="button" class="secondary" data-action="reset"> ${t('newAssessment')} </button>
           </div>

@@ -5742,6 +5742,182 @@ footer {
 }
 
 /* =================================================================== */
+/* Shared Case Banner Styles */
+/* =================================================================== */
+
+.shared-case-banner {
+  margin: 20px 0;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.1), rgba(33, 150, 243, 0.05));
+  border-left: 5px solid #2196F3;
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+}
+
+.shared-case-banner.expired {
+  background: linear-gradient(135deg, rgba(255, 152, 0, 0.1), rgba(255, 152, 0, 0.05));
+  border-left-color: #FF9800;
+}
+
+.banner-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.banner-icon {
+  font-size: 24px;
+}
+
+.banner-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: var(--text-color);
+}
+
+.case-id {
+  margin-left: auto;
+  padding: 4px 12px;
+  background: rgba(33, 150, 243, 0.2);
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.expiration-warning {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(255, 152, 0, 0.15);
+  border-radius: 6px;
+  margin-bottom: 16px;
+  color: #E65100;
+  font-weight: 500;
+}
+
+.warning-icon {
+  font-size: 20px;
+}
+
+.acknowledgment-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 6px;
+}
+
+.acknowledgment-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.acknowledgment-checkbox input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.acknowledgment-button {
+  padding: 12px 24px;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.acknowledgment-button:hover:not(:disabled) {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.acknowledgment-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.acknowledgment-button.success {
+  background: #00c853;
+}
+
+.acknowledgment-button.error {
+  background: #f44336;
+}
+
+.acknowledgment-status {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.success-message {
+  color: #00c853;
+  font-weight: 600;
+}
+
+.acknowledged-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  background: rgba(0, 200, 83, 0.1);
+  border-radius: 6px;
+  color: #00c853;
+  font-weight: 600;
+}
+
+.check-icon {
+  font-size: 24px;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Dark mode support */
+body.dark-mode .shared-case-banner {
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.15), rgba(33, 150, 243, 0.08));
+}
+
+body.dark-mode .acknowledgment-section {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .acknowledged-status {
+  background: rgba(0, 200, 83, 0.15);
+}
+
+/* =================================================================== */
 /* Live Tracking Status Styles */
 /* =================================================================== */
 
