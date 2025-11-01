@@ -417,6 +417,100 @@ def cleanup_old_cases():
         return jsonify({'error': str(e)}), 500
 
 
+@app.route('/store-shared-case', methods=['POST', 'OPTIONS'])
+def store_shared_case():
+    """
+    Store case data for shareable link (1-hour expiration)
+    Expects: caseId, results, formData, timestamp, sharedAt, expiresAt
+    Used by PWA share link functionality
+    """
+    # Handle preflight
+    if request.method == 'OPTIONS':
+        return '', 204
+
+    try:
+        data = request.get_json()
+
+        # Validate required fields
+        case_id = data.get('caseId')
+        if not case_id or not data.get('results'):
+            return jsonify({'error': 'Missing caseId or results'}), 400
+
+        # Create shared case object
+        shared_case = {
+            'caseId': case_id,
+            'results': data['results'],
+            'formData': data.get('formData', {}),
+            'timestamp': data.get('timestamp', datetime.now().timestamp() * 1000),
+            'sharedAt': data.get('sharedAt', datetime.now().isoformat()),
+            'expiresAt': data.get('expiresAt', (datetime.now() + timedelta(hours=1)).isoformat()),
+            'type': 'shared_link',
+            'version': 1
+        }
+
+        # Store in Cloud Storage with 'shared/' prefix
+        bucket = get_bucket()
+        if not bucket:
+            return jsonify({'error': 'Storage unavailable'}), 503
+
+        blob = bucket.blob(f"shared/{case_id}.json")
+        blob.upload_from_string(
+            json.dumps(shared_case, indent=2),
+            content_type='application/json'
+        )
+
+        print(f"✓ Shared case stored: {case_id}")
+
+        return jsonify({
+            'success': True,
+            'caseId': case_id,
+            'message': 'Shared case stored successfully'
+        }), 201
+
+    except Exception as e:
+        print(f"Error storing shared case: {e}")
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/get-shared-case/<case_id>', methods=['GET', 'OPTIONS'])
+def get_shared_case(case_id):
+    """
+    Retrieve shared case data by case ID
+    Returns: Case data if found and not expired
+    """
+    # Handle preflight
+    if request.method == 'OPTIONS':
+        return '', 204
+
+    try:
+        bucket = get_bucket()
+        if not bucket:
+            return jsonify({'error': 'Storage unavailable'}), 503
+
+        blob = bucket.blob(f"shared/{case_id}.json")
+
+        if not blob.exists():
+            return jsonify({'error': 'Case not found'}), 404
+
+        shared_case = json.loads(blob.download_as_text())
+
+        # Check expiration
+        expires_at = datetime.fromisoformat(shared_case.get('expiresAt', datetime.now().isoformat()))
+        if datetime.now() > expires_at:
+            # Delete expired case
+            blob.delete()
+            print(f"Deleted expired shared case: {case_id}")
+            return jsonify({'error': 'Case expired'}), 410
+
+        print(f"✓ Shared case retrieved: {case_id}")
+
+        return jsonify(shared_case), 200
+
+    except Exception as e:
+        print(f"Error retrieving shared case: {e}")
+        return jsonify({'error': str(e)}), 500
+
+
 @app.route('/health', methods=['GET'])
 def health():
     """Health check endpoint"""
